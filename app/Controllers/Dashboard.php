@@ -58,4 +58,7 @@ class Dashboard extends BaseController
     if (!session('guyus')) {return redirect()->to(base_url('/'));}
 		return view('dashboard/business',$data);
 	}
+	public function Prueba(){
+		echo "realizando prueba de carga a github";
+	}
 }
