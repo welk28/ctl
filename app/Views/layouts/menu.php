@@ -2,9 +2,9 @@
 <aside class="main-sidebar elevation-4 sidebar-light-olive sidebar-collapse">
     <!-- Brand Logo -->
     <a href="<?php echo base_url("/")?>" class="brand-link">
-      <img src="<?php echo base_url()?>/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="<?php echo base_url()?>/public/assets/img/logoCTL_ico.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">SAPCE 3</span>
+      <span class="brand-text font-weight-light">CTL</span>
     </a>
 
     <!-- Sidebar -->
@@ -12,10 +12,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo base_url()?>/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo base_url()?>/assets/dist/img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?= session('usuario'); ?></a>
         </div>
       </div>
 
@@ -27,36 +27,46 @@
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p> Alumnos <i class="right fas fa-angle-left"></i> </p>
+              <p> Configuración <i class="right fas fa-angle-left"></i> </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?php echo base_url('/menu') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inscritos</p>
+                  <p>Menú</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url('/alumnoh')?>" class="nav-link ">
+                <a href="<?php echo base_url('/datesite') ?>" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Historia</p>
+                  <p>Datos Sitio</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="<?php echo base_url('/depto') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Aspirante</p>
+                  <p>Departamento</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('/role') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rol/Cargo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('/business') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Giro empresarial</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url('/materias')?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Materias
-                <span class="right badge badge-danger">New</span>
-              </p>
+              
+              <i class="nav-icon fas fa-users-cog"></i>
+              <p>Personal</p>
             </a>
           </li>
           <li class="nav-item">

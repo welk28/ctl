@@ -33,9 +33,19 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-// $routes->add('/panel', 'Home::panel');
-// $routes->add('/materias', 'Materia::index');
-// $routes->add('/alumnoh', 'Alumno::alumnoh');
+$routes->add('/auth', 'Auth::auth');
+$routes->add('/logout', 'Auth::logout');
+
+//Rutas de Controlador Dashboard
+$routes->add('/dashboard', 'Dashboard::index');
+$routes->add('/menu', 'Dashboard::menu');
+$routes->add('/datesite', 'Dashboard::Datesite');
+$routes->add('/depto', 'Dashboard::Depto');
+$routes->add('/role', 'Dashboard::Role');
+$routes->add('/business', 'Dashboard::Business');
+
+
+
 // $routes->add('/carrera', 'Carrera::index');
 // $routes->post('/auth', 'Home::auth');
 

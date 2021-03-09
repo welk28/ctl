@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
+<?php
 $configModel = new \App\Models\Configurate_model($id);
-$fb=$configModel->getConfigfb(1);
-$tw=$configModel->getConfigfb(2);
-$tel=$configModel->getConfigfb(3);
-$mail=$configModel->getConfigfb(4);
-$cel=$configModel->getConfigfb(5);
-$ig=$configModel->getConfigfb(6);
-$title=$configModel->getConfigfb(7);
+
+$fb = $configModel->getConfigfb(1);
+$tw = $configModel->getConfigfb(2);
+$tel = $configModel->getConfigfb(3);
+$mail = $configModel->getConfigfb(4);
+$cel = $configModel->getConfigfb(5);
+$ig = $configModel->getConfigfb(6);
+$title = $configModel->getConfigfb(7);
 
 ?>
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title> <?php if(!empty($title->ruta)){echo $title->ruta;} else {echo "Sin titulo";}  ?></title>
+  <title> <?php if (!empty($title->ruta)) {
+            echo $title->ruta;
+          } else {
+            echo "Sin titulo";
+          }  ?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?php echo base_url('/')?>/public/assets/img/logoCTL_ico.png" rel="icon">
+  <link href="<?php echo base_url('/') ?>/public/assets/img/logoCTL_ico.png" rel="icon">
+  <!-- Alertify -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/alertify.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/themes/default.css">
 
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.min.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+
+  <link rel="stylesheet" href="<?php echo base_url('/') ?>/assets/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
   <!-- Vendor CSS Files -->
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="<?php echo base_url('/')?>/public/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/vendor/venobox/venobox.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="<?php echo base_url('/')?>/public/assets/css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url('/') ?>/public/assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -45,88 +62,94 @@ $title=$configModel->getConfigfb(7);
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <?php if(!empty($mail->ruta)):?>
-          <i class="icofont-envelope"></i> <a href="mailto:<?php echo $mail->ruta;?>"><?php echo $mail->ruta;?></a>
-        <?php endif;?>
-        <?php if(!empty($tel->ruta)):?>
+        <?php if (!empty($mail->ruta)) : ?>
+          <i class="icofont-envelope"></i> <a href="mailto:<?php echo $mail->ruta; ?>"><?php echo $mail->ruta; ?></a>
+        <?php endif; ?>
+        <?php if (!empty($tel->ruta)) : ?>
           <i class="icofont-phone"></i> <?= $tel->ruta ?>
-        <?php endif;?>
+        <?php endif; ?>
       </div>
       <div class="social-links">
-        <?php if(!empty($tw->ruta)):?>
-          <a href="<?php echo $tw->ruta;?>" class="twitter"><i class="icofont-twitter"></i></a>
-        <?php endif;?>
-        <?php if(!empty($fb->ruta)):?>
-          <a href="<?php echo $fb->ruta;?>" class="facebook"><i class="icofont-facebook"></i></a>
-        <?php endif;?>
-        <?php if(!empty($ig->ruta)):?>
-          <a href="<?php echo $ig->ruta;?>" class="instagram"><i class="icofont-instagram"></i></a>
-        <?php endif;?>
-        <!-- <?php if(!empty($tel->ruta)):?>
+        <?php if (!empty($tw->ruta)) : ?>
+          <a href="<?php echo $tw->ruta; ?>" class="twitter"><i class="icofont-twitter"></i></a>
+        <?php endif; ?>
+        <?php if (!empty($fb->ruta)) : ?>
+          <a href="<?php echo $fb->ruta; ?>" class="facebook"><i class="icofont-facebook"></i></a>
+        <?php endif; ?>
+        <?php if (!empty($ig->ruta)) : ?>
+          <a href="<?php echo $ig->ruta; ?>" class="instagram"><i class="icofont-instagram"></i></a>
+        <?php endif; ?>
+        <!-- <?php if (!empty($tel->ruta)) : ?>
           <a href="#" class="skype"><i class="icofont-skype"></i></a>
-        <?php endif;?>
-        <?php if(!empty($tel->ruta)):?>
+        <?php endif; ?>
+        <?php if (!empty($tel->ruta)) : ?>
           <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
-        <?php endif;?> -->
+        <?php endif; ?> -->
       </div>
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
+  <!-- ======= Header ======= d-none d-lg-flex align-items-center fixed-top -->
   <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <img class="logo mr-auto" src="<?php echo base_url('/')?>/public/assets/img/logoCTL2.png" alt="">
-      <!-- <h1 class="logo mr-auto"><a href="index.html">CTL</a></h1> -->
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav class="nav-menu d-none d-lg-block">
+    <div class=" d-flex align-items-center ">
+      <img class=" mr-auto ml-3" src="<?php echo base_url('/') ?>/public/assets/img/logoCTL2.png" alt="" height="45px">
+     
+      <nav class="nav-menu d-none d-lg-block  mr-3">
         <ul>
           <li class="active"><a href="index.html">Inicio</a></li>
-          <li class="drop-down"><a href="">Menú</a>
-            <ul>
-              <li><a href="#">Cultura</a></li>
-              <li class="drop-down"><a href="#">Submenu</a>
-                <ul>
-                  <li><a href="#">opcion 1</a></li>
-                  <li><a href="#">opcion 2</a></li>
-                  <li><a href="#">opcion 3</a></li>
-                  <li><a href="#">opcion 4</a></li>
-                  <li><a href="#">opcion 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Opción 2</a></li>
-              <li><a href="#">Opción 3</a></li>
-              <li><a href="#">Opción 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#about">Quienes somos</a></li>
-          <li><a href="#services">Servicios</a></li>
-          <li><a href="#portfolio">Portafolio</a></li>
-          <li><a href="#team">Equipo</a></li>
-          <li class="drop-down"><a href="">Menú</a>
-            <ul>
-              <li><a href="#">opciones</a></li>
-              <li class="drop-down"><a href="#">Submenu</a>
-                <ul>
-                  <li><a href="#">opcion 1</a></li>
-                  <li><a href="#">opcion 2</a></li>
-                  <li><a href="#">opcion 3</a></li>
-                  <li><a href="#">opcion 4</a></li>
-                  <li><a href="#">opcion 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Opción 2</a></li>
-              <li><a href="#">Opción 3</a></li>
-              <li><a href="#">Opción 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contacto</a></li>
+          <?php
+          //selecciona todos los menú activos del sitio
+          $db = \Config\Database::connect();
+          $consulta = $db->query("select * from menu where status=1");
+          $menu = $consulta->getResult();
+          //print_r($resultado);
+          ?>
+          <?php if (empty($menu)) : ?>
+            <div class="alert alert-danger" role="alert">
+              No hay opciones de menú
+            </div>
 
+          <?php else : ?>
+            <?php foreach ($menu as $m) : ?>
+              <?php
+              //de los menús obtenidos, verificar si tiene submenu, dependiendo de ello, mostrar un submenú o liga simple
+              $consulta = $db->query("select * from submenu where status=1 and idm=$m->idm");
+              $cm = $consulta->getNumRows();
+              $submenu = $consulta->getResult();
+              ?>
+              <?php if ($cm == 0) : ?>
+                <li><a href="index.html"><?= $m->descm ?></a></li>
+              <?php elseif ($cm > 0) : ?>
+                <li class="drop-down"><a href="index.html"><?= $m->descm ?></a>
+                  <ul>
+                    <?php foreach ($submenu as $s) : ?>
+                      <?php //verificar si el submenú tiene más opciones para generar su baseMenu, si no, solo colocar simple
+                      $consulta = $db->query("select * from basemenu where status=1 and ids=$s->ids");
+                      $cs = $consulta->getNumRows();
+                      $basemenu = $consulta->getResult();
+                      ?>
+                      <?php if ($cs == 0) : ?>
+                        <li><a href="#"><?= $s->descs ?></a></li>
+                      <?php elseif ($cs > 0) : ?>
+                        <li class="drop-down"><a href="#"><?= $s->descs ?></a>
+                          <ul>
+                            <?php foreach ($basemenu as $b) : ?>
+                              <li><a href="#"><?= $b->descb ?></a></li>
+                            <?php endforeach; ?>
+                          </ul>
+                        </li>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                  </ul>
+                </li>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          <?php endif; ?>
+          <li><a href="#" data-toggle="modal" data-target="#modal-default"><i class="fas fa-user"></i> Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="#about" class="get-started-btn scrollto">Conócenos</a>
+      <!-- <a href="#about" class=" scrollto">Login</a> -->
 
     </div>
   </header><!-- End Header -->
@@ -140,7 +163,7 @@ $title=$configModel->getConfigfb(7);
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(<?php echo base_url('/')?>/public/assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item active" style="background-image: url(<?php echo base_url('/') ?>/public/assets/img/slide/slide-1.jpg)">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Bienvenido a <span>Cultura y tiempo libre</span></h2>
@@ -151,7 +174,7 @@ $title=$configModel->getConfigfb(7);
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(<?php echo base_url('/')?>/public/assets/img/slide/slide-2.jpg)">
+        <div class="carousel-item" style="background-image: url(<?php echo base_url('/') ?>/public/assets/img/slide/slide-2.jpg)">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -162,7 +185,7 @@ $title=$configModel->getConfigfb(7);
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(<?php echo base_url('/')?>/public/assets/img/slide/slide-3.jpg)">
+        <div class="carousel-item" style="background-image: url(<?php echo base_url('/') ?>/public/assets/img/slide/slide-3.jpg)">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
@@ -231,7 +254,7 @@ $title=$configModel->getConfigfb(7);
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2">
-            <img src="<?php echo base_url('/')?>/public/assets/img/about.jpg" class="img-fluid" alt="">
+            <img src="<?php echo base_url('/') ?>/public/assets/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -312,14 +335,14 @@ $title=$configModel->getConfigfb(7);
         </div>
 
         <div class="owl-carousel clients-carousel">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-1.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-2.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-3.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-4.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-5.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-6.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-7.png" alt="">
-          <img src="<?php echo base_url('/')?>/public/assets/img/clients/client-8.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-1.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-2.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-3.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-4.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-5.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-6.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-7.png" alt="">
+          <img src="<?php echo base_url('/') ?>/public/assets/img/clients/client-8.png" alt="">
         </div>
 
       </div>
@@ -459,12 +482,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 1</h4>
                 <p>App</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -473,12 +496,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Web 3</h4>
                 <p>Web</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -487,12 +510,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 2</h4>
                 <p>App</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -501,12 +524,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Card 2</h4>
                 <p>Card</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -515,12 +538,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Web 2</h4>
                 <p>Web</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -529,12 +552,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 3</h4>
                 <p>App</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -543,12 +566,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Card 1</h4>
                 <p>Card</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -557,12 +580,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Card 3</h4>
                 <p>Card</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -571,12 +594,12 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Web 3</h4>
                 <p>Web</p>
                 <div class="portfolio-links">
-                  <a href="<?php echo base_url('/')?>/public/assets/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
+                  <a href="<?php echo base_url('/') ?>/public/assets/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -600,7 +623,7 @@ $title=$configModel->getConfigfb(7);
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="<?php echo base_url('/')?>/public/assets/img/team/team-1.jpg" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/team/team-1.jpg" alt="">
               <h4>Walter White</h4>
               <span>Chief Executive Officer</span>
               <p>
@@ -617,7 +640,7 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="<?php echo base_url('/')?>/public/assets/img/team/team-2.jpg" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/team/team-2.jpg" alt="">
               <h4>Sarah Jhinson</h4>
               <span>Product Manager</span>
               <p>
@@ -634,7 +657,7 @@ $title=$configModel->getConfigfb(7);
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="<?php echo base_url('/')?>/public/assets/img/team/team-3.jpg" alt="">
+              <img src="<?php echo base_url('/') ?>/public/assets/img/team/team-3.jpg" alt="">
               <h4>William Anderson</h4>
               <span>CTO</span>
               <p>
@@ -746,7 +769,7 @@ $title=$configModel->getConfigfb(7);
         &copy; Copyright <strong><span>CTL</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        
+
         Plantilla <a href="#">Bootstrap</a>
       </div>
     </div>
@@ -755,17 +778,84 @@ $title=$configModel->getConfigfb(7);
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/php-email-form/validate.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="<?php echo base_url('/')?>/public/assets/vendor/venobox/venobox.min.js"></script>
-
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/php-email-form/validate.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/vendor/venobox/venobox.min.js"></script>
+  <!-- Alertify -->
+  <script src="<?php echo base_url() ?>/assets/alertifyjs/alertify.js"></script>
   <!-- Template Main JS File -->
-  <script src="<?php echo base_url('/')?>/public/assets/js/main.js"></script>
+  <script src="<?php echo base_url('/') ?>/public/assets/js/main.js"></script>
+  <!-- js funcional -->
+
+  <script src="<?php echo base_url('/') ?>/assets/maindata.js"></script>
 
 </body>
 
 </html>
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <?php if (!empty($title->ruta)) {
+            echo $title->ruta;
+          } else {
+            echo "Sin titulo";
+          }  ?>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- inicia cuerpo de formulario de inicio de sesion -->
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Inicie sesión</p>
+
+          <form id="frmauth" action="<?php echo base_url('/auth') ?>" method="post">
+            <div class="input-group mb-3">
+              <input type="hidden" class="form-control" name="ruta" id="ruta" value="<?php echo base_url('/dashboard')?>">
+              <input type="text" class="form-control" name="usuario" placeholder="Usuario" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" name="contra" placeholder="Contraseña" required>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary btn-flat btn-block">Entrar</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+
+
+          <p class="mb-1">
+            <a href="forgot-password.html" class="ligasma">Olvidé mi contraseña</a>
+          </p>
+          <p class="mb-0">
+            <a href="register.html" class="text-center ligasma">Deseo registrarme</a>
+          </p>
+        </div>
+        <!-- finaliza cuerpo de formulario -->
+      </div>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

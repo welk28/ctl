@@ -136,3 +136,74 @@ insert into basemenu values
 (88,'Mejores restaurantes',1,23),
 (89,'Chef ',1,23),
 (90,'Recetas',1,23);
+
+create table rolgral(
+    idrg int autoincrement not null,
+    descr varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+    status tinyint,
+    primary key(idrg)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+insert into rolgral values
+(1,'Grupo control',1),
+(2,'Grupo editores',1),
+(3,'Contenido',1),
+(4,'Grupo publicidad',1);
+
+create table rolcargo(
+    idrc int autoincrement not null,
+    descc varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+    status tinyint,
+    primary key(idrc)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+insert into rolcargo values
+(1,'Super Administrador',1,1),
+(2,'Administardor programador',1,1),
+(3,'Administrador gestion',1,1),
+(4,'Contenidos o redactor ',1,2),
+(5,'Autor activo',1,2),
+(6,'Autor privilegios',1,2),
+(7,'Creador',1,2),
+(8,'Corrector',1,2),
+(9,'SEO/SEM Manager',1,3),
+(10,'Contenidos/Copywriter',1,3),
+(11,'Diseñador/a gráfico/a: ',1,3),
+(12,'Supervisor',1,4),
+(13,'Aliados',1,4),
+(14,'Colaborador',1,4),
+(15,'Analista',1,4),
+(16,'Agencias',1,4),
+(17,'Anunciante',1,4);
+
+insert into estado values
+(1,'Aguascalientes'),
+(2,'Baja California'),
+(3,'Baja California Sur'),
+(4,'Campeche'),
+(5,'Chiapas'),
+(6,'Chihuahua'),
+(7,'Ciudad de Mexico'),
+(8,'Cohahuila'),
+(9,'Colima'),
+(10,'Durango'),
+(11,'Estado de México'),
+(12,'Guanajuato'),
+(13,'Guerrero'),
+(14,'Hidalgo'),
+(15,'Jalisco'),
+(16,'Michoacán'),
+(17,'Morelos'),
+(18,'Nayarit'),
+(19,'Nuevo León'),
+(20,'Oaxaca'),
+(21,'Puebla'),
+(22,'Querétaro'),
+(23,'Quintana Roo'),
+(24,'San luis Potosi'),
+(25,'Sinaloa'),
+(26,'Sonora'),
+(27,'Tabasco'),
+(28,'Tamaulipas'),
+(29,'Tlaxcala'),
+(30,'Veracruz'),
+(31,'Zacatecas');
+

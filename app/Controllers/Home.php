@@ -65,8 +65,12 @@ class Home extends BaseController
 	}
 	
 	public function panel(){
+		if(session('guyus')) {
+			return view('panel');
+		}else{
+			return redirect()->to(base_url('/'));
+		}
 		
-		return view('panel');
 	}
 
 
