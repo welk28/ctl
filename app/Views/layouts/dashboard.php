@@ -17,7 +17,7 @@ $title = $configModel->getConfigfb(7);
     }  ?>
   </title>
   <!-- Favicons -->
-  <link href="<?php echo base_url('/') ?>/public/assets/img/logoCTL_ico.png" rel="icon">
+  <link href="<?php echo base_url('/') ?>/assets/logoCTL_ico.png" rel="icon">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->

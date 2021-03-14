@@ -2,7 +2,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-olive sidebar-collapse">
     <!-- Brand Logo -->
     <a href="<?php echo base_url("/")?>" class="brand-link">
-      <img src="<?php echo base_url()?>/public/assets/img/logoCTL_ico.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="<?php echo base_url()?>/assets/logoCTL_ico.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">CTL</span>
     </a>
