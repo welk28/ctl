@@ -45,4 +45,7 @@ class Auth extends BaseController
 		$this->session->destroy();
 		return redirect()->to(base_url('/'));
 	}
+	public function uno(){
+		echo "un menesaje";
+	}
 }

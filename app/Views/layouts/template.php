@@ -49,11 +49,11 @@ $title = $configModel->getConfigfb(7);
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.min.css">
   <style>
-  /* Make the image fully responsive */
-  .carousel-inner img {
-    width: 100%;
-    height: 100%;
-  }
+    /* Make the image fully responsive */
+    .carousel-inner img {
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 
@@ -130,160 +130,108 @@ $title = $configModel->getConfigfb(7);
   <div class="row ">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-    <div id="demo" class="carousel slide" data-ride="carousel">
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-      </ul>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="<?php echo base_url('/')?>/public/img/la.jpg" alt="Los Angeles" width="1100" height="500">
-          <div class="carousel-caption">
-            <h3>Los Angeles</h3>
-            <p>We had such a great time in LA!</p>
+      <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="<?php echo base_url('/') ?>/public/img/la.jpg" alt="Los Angeles" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Los Angeles</h3>
+              <p>We had such a great time in LA!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="<?php echo base_url('/') ?>/public/img/chicago.jpg" alt="Chicago" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Chicago</h3>
+              <p>Thank you, Chicago!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="<?php echo base_url('/') ?>/public/img/ny.jpg" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>New York</h3>
+              <p>We love the Big Apple!</p>
+            </div>
           </div>
         </div>
-        <div class="carousel-item">
-          <img src="<?php echo base_url('/')?>/public/img/chicago.jpg" alt="Chicago" width="1100" height="500">
-          <div class="carousel-caption">
-            <h3>Chicago</h3>
-            <p>Thank you, Chicago!</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="<?php echo base_url('/')?>/public/img/ny.jpg" alt="New York" width="1100" height="500">
-          <div class="carousel-caption">
-            <h3>New York</h3>
-            <p>We love the Big Apple!</p>
-          </div>
-        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
       </div>
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
     </div>
   </div>
-    </div>
-    
-  <main id="main mt-5">
 
-    <!-- ======= Blog Section ======= -->
-    <div id="blog" class="blog-area">
-      <div class="blog-inner area-padding">
-        <div class="blog-overly"></div>
-        <div class="container ">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="section-headline text-center">
-                <h2>Latest News</h2>
+  <main id="main mt-5">
+    
+
+    <?php foreach ($datos as $m) : ?>
+      <!-- ======= Blog Section ======= -->
+      <?php 
+      $db=\Config\Database::connect();
+      $query= $db->query("SELECT p.idpost, p.fechacrea, p.imgp, p.idm, m.descm, p.ids, p.idb, p.titulo, p.descripcion FROM post p, menu m WHERE p.idm=m.idm AND m.status=1 AND p.status=1 AND m.idm=$m->idm");
+      $post=$query->getResult();
+
+      ?>
+      <div id="blog" class="blog-area">
+        <div class="blog-inner area-padding">
+          <div class="blog-overly"></div>
+          <div class="container ">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                  <h2><?= $m->descm ?></h2>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="<?php echo base_url('/') ?>/public/assets/img/blog/1.jpg" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">13 comments</a>
+            <div class="row">
+            <?php foreach($post as $p):?>
+              <!-- Start Left Blog -->
+              <div class="col-md-4 col-sm-4 ">
+                <div class="single-blog">
+                  <div class="single-blog-img">
+                    <a href="blog.html">
+                      <img src="<?php echo base_url('/') ?>/public/img/post/<?= $p->imgp ?>.jpg" alt=""> 
+                    </a>
+                  </div>
+                  <div class="blog-meta">
+                    <span class="comments-type">
+                      <i class="fa fa-comment-o"></i>
+                      <a href="#">13 comments</a>
+                    </span>
+                    <span class="date-type">
+                      <i class="fa fa-calendar"></i><?= $p->fechacrea ?>
+                    </span>
+                  </div>
+                  <div class="blog-text">
+                    <h4>
+                      <a href="blog.html"><?= $p->titulo ?></a>
+                    </h4>
+                    <p>
+                      <?= $p->descripcion ?>
+                    </p>
+                  </div>
+                  <span>
+                    <a href="blog.html" class="ready-btn">Leer más</a>
                   </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
                 </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Assumenda repud eum veniam</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
+                <!-- Start single blog -->
               </div>
-              <!-- Start single blog -->
+              <!-- End Left Blog-->
+              <?php endforeach;?>
             </div>
-            <!-- End Left Blog-->
-            <!-- Start Left Blog -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="<?php echo base_url('/') ?>/public/assets/img/blog/2.jpg" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">130 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Explicabo magnam quibusdam.</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-              <!-- Start single blog -->
-            </div>
-            <!-- End Left Blog-->
-            <!-- Start Right Blog-->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="single-blog">
-                <div class="single-blog-img">
-                  <a href="blog.html">
-                    <img src="<?php echo base_url('/') ?>/public/assets/img/blog/3.jpg" alt="">
-                  </a>
-                </div>
-                <div class="blog-meta">
-                  <span class="comments-type">
-                    <i class="fa fa-comment-o"></i>
-                    <a href="#">10 comments</a>
-                  </span>
-                  <span class="date-type">
-                    <i class="fa fa-calendar"></i>2016-03-05 / 09:10:16
-                  </span>
-                </div>
-                <div class="blog-text">
-                  <h4>
-                    <a href="blog.html">Lorem ipsum dolor sit amet</a>
-                  </h4>
-                  <p>
-                    Lorem ipsum dolor sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.sit amet conse adipis elit Assumenda repud eum veniam optio modi sit explicabo nisi magnam quibusdam.
-                  </p>
-                </div>
-                <span>
-                  <a href="blog.html" class="ready-btn">Read more</a>
-                </span>
-              </div>
-            </div>
-            <!-- End Right Blog-->
+            
           </div>
         </div>
-      </div>
-    </div><!-- End Blog Section -->
-
+      </div><!-- End Blog Section -->
+    <?php endforeach; ?>
     <!-- ======= Suscribe Section ======= -->
     <div class="suscribe-area">
       <div class="container">
