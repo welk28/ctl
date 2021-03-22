@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 //use App\Models\Login_model;
-//use App\Models\Configurate_model;
+use App\Models\MenuModel;
 use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
@@ -16,6 +16,8 @@ class Dashboard extends BaseController
 	
 	public function index()
 	{
+		
+
 		$data=[
       'uri'=> current_url(true)
     ];
@@ -24,8 +26,11 @@ class Dashboard extends BaseController
 	}
 
 	public function Menu(){
+		$datos= $this->db->query("SELECT m.idm, m.descm, m.status, p.idp, p.app, p.nomp FROM menu m, personal p WHERE p.idp=m.edita;");
+		$result=$datos->getResult();
 		$data=[
-      'uri'=> current_url(true)
+      'uri'=> current_url(true),
+			'menu'=> $result
     ];
     if (!session('guyus')) {return redirect()->to(base_url('/'));}
 		return view('dashboard/menu',$data);
@@ -35,7 +40,7 @@ class Dashboard extends BaseController
       'uri'=> current_url(true)
     ];
     if (!session('guyus')) {return redirect()->to(base_url('/'));}
-		return view('dashboard/menu',$data);
+		return view('dashboard/datesite',$data);
 	}
 	public function Depto(){
 		$data=[

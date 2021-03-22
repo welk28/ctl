@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Login_model;
-use App\Models\HomeModel;
+//use App\Models\HomeModel;
+use App\Models\MenuModel;
 use App\Controllers\BaseController;
 
 class Home extends BaseController
@@ -15,16 +16,17 @@ class Home extends BaseController
 
 	public function index()
 	{
-		// $con =new HomeModel();
-		// $datos= $con->listarMenu();
-		//$db=\Config\Database::connect();
-
-		$datos= $this->db->query("SELECT distinct p.idm, m.descm FROM post p, menu m WHERE p.idm=m.idm AND m.status=1 AND p.status=1");
+		// $modelo= new MenuModel();
+		// $id = $modelo->insert([
+		// 	'descm'=> "welk",
+		// 	'status'=> 1,
+		// ]);
+		$datos= $this->db->query("SELECT distinct p.idm, m.descm FROM post p, menu m WHERE p.idm=m.idm AND m.status=1 AND p.status=1 AND p.main=1");
 		$result=$datos->getResult();
 		$data = [
 			'datos' => $result
 		];
-		echo view('layouts/template', $data);
+		echo view('home', $data);
 	}
 
 	public function auth()

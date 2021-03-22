@@ -6,11 +6,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Bienvenido a CTL</h1>
+        <h1 class="m-0 text-dark">Opciones de menú principal</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="<?php echo base_url('/dashboard')?>">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url('/dashboard') ?>">Inicio</a></li>
           <li class="breadcrumb-item active"><?= $uri->getSegment(1) ?></li>
         </ol>
       </div><!-- /.col -->
@@ -34,8 +34,54 @@
       </div>
     </div>
     <div class="card-body">
-      <p>Hola <?php echo session('nombre'); ?>, ha sido identificado(a) tu acceso a CTL como <b> <?= session('idrc'); ?> </b></p>
-      <p>En el panel de tu izquierda verás las opciones a las que tienes acceso</p>
+      <!-- inicio de despliegue de datatable -->
+      
+      <?php if(empty($menu)):?>
+      <div class="alert alert-warning alert-dismissible">
+        <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+        No hay datos para mostrar
+      </div>
+      <?php else: ?>
+        
+      <table id="listax" class="table table-striped table-bordered table-sm" style="width:100%">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Descripcion</th>
+            <th>Status</th>
+            <th>Editado por</th>
+            <th>Opciones</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach($menu as $m):?>
+          <tr>
+            <td><?= $m->idm ?></td>
+            <td><?= $m->descm ?></td>
+            <td><?php if($m->status==1){echo "<i class='far fa-check-circle' style='color: green;'></i> ";}else{echo "<i class='far fa-times-circle' style='color: red;'></i>";} ?></td>
+            <td><?= $m->app." ".$m->nomp ?></td>
+            <td align="center">
+            <a href="#" class="btn btn-success btn-xs" title="Ver los datos generales del menú"><i class="fas fa-th-list"></i></a>
+            <a href="#" class="btn btn-primary btn-xs" title="Modificar datos del menú"><i class="fas fa-pencil-alt"></i></a>
+            <a href="#" class="btn btn-warning btn-xs" title="Borrar el menú"><i class="far fa-trash-alt"></i></a>
+
+            </td>
+          </tr>
+          <?php endforeach;?>
+        </tbody>
+        <tfoot>
+          <tr>
+          <th>id</th>
+            <th>Descripcion</th>
+            <th>Status</th>
+            <th>Editado por</th>
+            <th>Opciones</th>
+          </tr>
+        </tfoot>
+      </table>
+      <?php endif;?>
+      <!-- fin de despliegue de datatabla -->
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
