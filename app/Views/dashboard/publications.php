@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Opciones de menú principal</h1>
+        <h1 class="m-0 text-dark">Lista de publicaciones</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
 <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Bienvenido <b><?php echo session('usuario'); ?></b></h3>
+      <h3 class="card-title"> <b><?php echo session('usuario'); ?></b></h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -36,7 +36,7 @@
     <div class="card-body">
       <!-- inicio de despliegue de datatable -->
       
-      <?php if(empty($menu)):?>
+      <?php if(empty($post)):?>
       <div class="alert alert-warning alert-dismissible">
         <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
         No hay datos para mostrar
@@ -47,45 +47,52 @@
         <thead>
           <tr>
             <th>id</th>
-            <th>Descripcion</th>
-            
-            <th>Submenú</th>
-            <th>Editado por</th>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Categoria</th>
+            <th>Fecha crea</th>
+            <th>Status</th>
             <th>Opciones</th>
             
           </tr>
         </thead>
         <tbody>
-        <?php foreach($menu as $m):?>
+        <?php foreach($post as $p):?>
+          <?php 
+            $me=NULL;
+            $sm=NULL;
+            $bm=NULL;
+            $ps=NULL;
+              $db=\Config\Database::connect();
+              $menu= $db->query("SELECT * FROM menu WHERE idm=$p->idm");
+              $me=$menu->getRow();
+              if(!empty($p->ids)){
+                $sub= $db->query("SELECT * FROM submenu WHERE ids=$p->ids");
+                $sm=$sub->getRow();
+
+              }
+              if(!empty($p->idb)){
+
+                $basemenu= $db->query("SELECT * FROM basemenu WHERE idb=$p->idb");
+                $bm=$basemenu->getRow();
+              }
+              $personal= $db->query("SELECT * FROM personal WHERE idp=$p->idp");
+              $pe=$personal->getRow();
+              $postatus= $db->query("SELECT * FROM poststatus WHERE idst=$p->status");
+              $ps=$postatus->getRow();
+            ?>
           <tr>
-            <td><?= $m->idm ?> </td>
-            <td>
-              <?php if($m->status==1){echo "<i class='far fa-check-circle' style='color: green;'></i> ";}else{echo "<i class='far   fa-times-circle' style='color: red;'></i>";} ?>
-              <?= $m->descm ?></td>
-            
+            <td><?= $p->idpost ?> </td>
+            <td><?= $p->titulo ?></td>
+            <td><?= $pe->app." ".$pe->nomp ?>   </td>
             <td>
             <?php 
-              $db=\Config\Database::connect();
-              $sub= $db->query("SELECT * FROM submenu WHERE idm=$m->idm");
-              $submenu=$sub->getResult();
-            ?>
-            <?php if(!empty($submenu)):?>
-              <?php foreach($submenu as $s):?>
-              <?php 
-                $base= $db->query("select * from basemenu where ids=$s->ids"); 
-                $cb= $base->getNumRows();
-              ?>
-                
-                <?php if($s->status==1){echo "<i class='far fa-check-circle' style='color: green;'></i> ";}else{echo "<i class='far fa-times-circle' style='color: red;'></i>";} ?>
-                <?= $s->descs.' ' ?>  
-                  <?php if($cb>0):?>
-                    <small class="badge badge-success"><?= ' '.$cb ?> </small>
-                  <?php endif;?>
-                <br>
-              <?php endforeach?>
-            <?php endif;?>
-            </td>
-            <td><?= $m->app." ".$m->nomp ?></td>
+            echo $me->descm;
+            if(!empty($sm->descs)){echo " / ".$sm->descs;}
+
+            if(!empty($bm->descb)){echo " / ".$bm->descb;} ?></td>
+            <td><?= $p->created_at ?>   </td>
+            <td><?= $ps->descst ?> </td>
             <td align="center">
             <a href="#" class="btn btn-success btn-xs" title="Ver los datos generales del menú"><i class="fas fa-th-list"></i></a>
             <a href="#" class="btn btn-primary btn-xs" title="Modificar datos del menú"><i class="fas fa-pencil-alt"></i></a>

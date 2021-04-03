@@ -43,6 +43,8 @@ $routes->add('/datesite', 'Dashboard::Datesite');
 $routes->add('/depto', 'Dashboard::Depto');
 $routes->add('/role', 'Dashboard::Role');
 $routes->add('/business', 'Dashboard::Business');
+$routes->add('/publications', 'Dashboard::Publications');
+$routes->add('/newpublication', 'Dashboard::NewPublication');
 
 
 

@@ -1,5 +1,6 @@
   <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-olive sidebar-collapse">
+<aside class="main-sidebar elevation-4 sidebar-light-olive sidebar-collapse "> 
+<!--  -->
     <!-- Brand Logo -->
     <a href="<?php echo base_url("/")?>" class="brand-link">
       <img src="<?php echo base_url()?>/assets/logoCTL_ico.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -82,22 +83,22 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Horarios
+                Publicaciones
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="<?php echo base_url('/publications') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista oferta</p>
+                  <p>Lista</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="<?php echo base_url('/newpublication') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar</p>
+                  <p>Nueva publicación</p>
                 </a>
               </li>
               <li class="nav-item">
