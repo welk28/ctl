@@ -16,11 +16,6 @@ class Home extends BaseController
 
 	public function index()
 	{
-		// $modelo= new MenuModel();
-		// $id = $modelo->insert([
-		// 	'descm'=> "welk",
-		// 	'status'=> 1,
-		// ]);
 		$datos= $this->db->query("SELECT distinct p.idm, m.descm FROM post p, menu m WHERE p.idm=m.idm AND m.status=1 AND p.status=1 AND p.main=1");
 		$result=$datos->getResult();
 		$data = [

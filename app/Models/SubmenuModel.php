@@ -11,7 +11,7 @@ class SubmenuModel extends Model
 	protected $primaryKey           = 'ids';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDeletes        = false;
 	
 	protected $allowedFields        = ['descs', 'status','idm','modifica',];
 

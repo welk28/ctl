@@ -46,10 +46,19 @@ $routes->add('/business', 'Dashboard::Business');
 $routes->add('/publications', 'Dashboard::Publications');
 $routes->add('/newpublication', 'Dashboard::NewPublication');
 
+//menu y submenu
+$routes->get('/menu/(:any)', 'Dashboard::showMenu/$1');
+$routes->post('/delmenu', 'Dashboard::borraMenu');
+$routes->post('/updateMenu', 'Dashboard::updateMenu');
+$routes->post('/addSubmenu', 'Dashboard::addSubmenu');
+
+//submenu
+$routes->get('/submenu/(:any)', 'Dashboard::showSubmenu/$2');
+//rutas para envio de datos por post y get 
+// $routes->get('/obtenerNombre/(:any)', 'Crud::obtenerNombre/$1');
+// $routes->post('/crear', 'Crud::crear');
 
 
-// $routes->add('/carrera', 'Carrera::index');
-// $routes->post('/auth', 'Home::auth');
 
 /*
  * --------------------------------------------------------------------

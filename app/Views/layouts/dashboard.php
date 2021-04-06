@@ -29,6 +29,7 @@ $title = $configModel->getConfigfb(7);
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>/assets/mainstyle.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -39,6 +40,11 @@ $title = $configModel->getConfigfb(7);
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/summernote/summernote-bs4.css">
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="<?php echo base_url()?>/assets/sweetalert/sweetalert2.min.css">
+   <!-- Alertify -->
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/alertify.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/themes/default.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
@@ -73,6 +79,8 @@ $title = $configModel->getConfigfb(7);
   <script src="<?php echo base_url() ?>/assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="<?php echo base_url() ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Popper -->
+  <script src="<?php echo base_url() ?>/assets/popper.min.js"></script>
   <!-- overlayScrollbars -->
   <script src="<?php echo base_url() ?>/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
@@ -96,16 +104,24 @@ $title = $configModel->getConfigfb(7);
   <!-- PAGE SCRIPTS -->
   <script src="<?php echo base_url() ?>/assets/dist/js/pages/dashboard2.js"></script>
   <!-- JS CONTROL GENERAL -->
-  <script src="<?php echo base_url() ?>/assets/datas.js"></script>
+  <script src="<?php echo base_url() ?>/assets/admindata.js"></script>
   <!-- Select2 -->
 <script src="<?php echo base_url() ?>/assets/plugins/select2/js/select2.full.min.js"></script>
 <!-- Summernote -->
 <script src="<?php echo base_url() ?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="<?php echo base_url()?>/assets/sweetalert/sweetalert2.all.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="<?php echo base_url() ?>/assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+ <!-- Alertify -->
+ <script src="<?php echo base_url() ?>/assets/alertifyjs/alertify.js"></script>
 </body>
 
 </html>
 <script>
   $(function() {
+        
+
     //Initialize Select2 Elements
     $('.select2').select2()
 

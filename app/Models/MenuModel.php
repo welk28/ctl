@@ -8,12 +8,12 @@ class MenuModel extends Model
 {
 	
 	protected $table                = 'menu';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'idm';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDeletes = false;
 	
-	protected $allowedFields        = ['descm','status'];
+	protected $allowedFields        = ['descm','status','edita'];
 
 	// Dates
 	protected $useTimestamps        = true;
