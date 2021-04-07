@@ -14,6 +14,9 @@ function agregaform(datos) {
 }
 
 $(document).ready(function () {
+  $('.solo-numero').keyup(function (){
+		this.value = (this.value + '').replace(/[^0-9]/g, '');
+	});
   //Swal.fire('Any fool can use a computer');
 
   $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
@@ -31,50 +34,6 @@ $(document).ready(function () {
 
     return false;
   });
-
-
-  //borrar soft una opción de menú
-  $(".frmborramenu").submit(function (e) {
-    e.preventDefault();
-    //Swal.fire('mensaje');
-
-    Swal.fire({
-      title: 'Está seguro de borrar?',
-      text: "Esta acción borrará el menú, con ello tambien los submenú y base menú ligados!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, Eliminar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        swal.fire("aqui debera estar la validacion del Ajax");
-        $.ajax({
-          url: $(".frmborramenu").attr("action"),
-          type: $(".frmborramenu").attr("method"),
-          data: $(".frmborramenu").serialize(),
-          success: function (response) {
-            //alert(response);
-
-            if (response == 1) {
-              Swal.fire(
-                'Eliminado!', 'Eliminado con éxito!', 'success');
-
-              setTimeout(function () {
-                location.reload();
-              }, 800);
-            } else {
-              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
-            }
-          }
-        });
-
-
-      }
-    })
-  });
-  //fin de borrado de menu
 
   //INICIO de actualización de menú
   $("#frmupdateMenu").submit(function (e) {
@@ -253,10 +212,15 @@ $(document).ready(function () {
     });
   });
   //FIN de ALTA de BASEmenú
+//------------------------------------------------------------------------------------------
+//SECCION DE BORRADO DE REGISTROS
+
+
+  //INICIO DE BORRA BASEMENU
   $(document).on("click", "#listax .btn-borrabm", function () {
     var idb = $(this).closest("tr").find(".idb").val();
     var base_url = $(this).closest("tr").find(".base_urlb").val();
-    alertify.success(base_url);
+    //alertify.success(base_url);
     Swal.fire({
       title: 'Está seguro de borrar?',
       text: "Esta acción borrará el registro, con ello tambien los que tenga ligados!",
@@ -295,6 +259,93 @@ $(document).ready(function () {
       }
     })
   });
+  //FIN DE BORRADO BASEMENU
 
 
+  //borrar de SUBmenú
+  $(".frmborrasubmenu").submit(function (e) {
+    e.preventDefault();
+    //Swal.fire('mensaje');
+
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el submenú, con ello tambien las basemenú ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //swal.fire("aqui debera estar la validacion del Ajax");
+        $.ajax({
+          url: $(".frmborrasubmenu").attr("action"),
+          type: $(".frmborrasubmenu").attr("method"),
+          data: $(".frmborrasubmenu").serialize(),
+          success: function (response) {
+            //alert(response);
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //fin de borrado de SUBmenu
+  
+  
+  //borrar de MENU
+  $(".frmborramenu").submit(function (e) {
+    e.preventDefault();
+    //Swal.fire('mensaje');
+
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el Menú, así como los submenú y con ello tambien las basemenú ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //swal.fire("aqui debera estar la validacion del Ajax");
+        $.ajax({
+          url: $(".frmborramenu").attr("action"),
+          type: $(".frmborramenu").attr("method"),
+          data: $(".frmborramenu").serialize(),
+          success: function (response) {
+            //alert(response);
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //fin de borrado de MENU
 });

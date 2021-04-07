@@ -27,10 +27,10 @@
     <div class="card-header">
       <h3 class="card-title">Bienvenido <b><?php echo session('usuario'); ?></b></h3>
       <div class="col-1 text-right">
-        <form class="frmborramenu" action="<?php echo base_url('/delmenu'); ?>" method="post">
+        <form class="frmborrasubmenu" action="<?php echo base_url('/delSubmenu'); ?>" method="post">
           <button type="submit" class="btn btn-warning btn-xs" title="Borra registro">
             <i class="far fa-trash-alt"></i> Eliminar</button>
-          <input type="hidden" value="<?php echo $ids; ?>" name="idm">
+          <input type="hidden" value="<?php echo $ids; ?>" name="ids">
         </form>
       </div>
     </div>

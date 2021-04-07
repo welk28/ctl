@@ -1,6 +1,10 @@
 <?php $session = session();
-$configModel = new \App\Models\Configurate_model($id);
-$title = $configModel->getConfigfb(7);
+
+//selecciona todos los menú activos del sitio
+$db = \Config\Database::connect();
+$consulta = $db->query("SELECT * FROM datesite WHERE id=1");
+$dsite = $consulta->getRow();
+//print_r($resultado);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,14 +14,14 @@ $title = $configModel->getConfigfb(7);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>
-    <?php if (!empty($title->ruta)) {
-      echo $title->ruta;
+    <?php if (!empty($dsite->titulo)) {
+      echo $dsite->titulo;
     } else {
       echo "Sin titulo";
     }  ?>
   </title>
   <!-- Favicons -->
-  <link href="<?php echo base_url('/') ?>/assets/logoCTL_ico.png" rel="icon">
+  <link href="<?php echo base_url() ?>/public/uploads/<?=$dsite->icono ?>" rel="icon">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->
@@ -115,6 +119,7 @@ $title = $configModel->getConfigfb(7);
 <script src="<?php echo base_url() ?>/assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
  <!-- Alertify -->
  <script src="<?php echo base_url() ?>/assets/alertifyjs/alertify.js"></script>
+
 </body>
 
 </html>

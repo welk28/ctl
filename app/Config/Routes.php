@@ -55,17 +55,18 @@ $routes->post('/addSubmenu', 'Dashboard::addSubmenu');
 //submenu
 $routes->get('/submenu/(:any)', 'Dashboard::showSubmenu/$2');
 $routes->post('/updateBasemenu', 'Dashboard::updateBasemenu');
-$routes->post('/newBasemenu', 'Dashboard::newBasemenu');
+$routes->post('/delSubmenu', 'Dashboard::delSubmenu');
 
 //basemenu
+$routes->post('/newBasemenu', 'Dashboard::newBasemenu');
 $routes->post('/updatesSubmenu', 'Dashboard::updatesSubmenu');
 $routes->post('/delBasemenu', 'Dashboard::delBasemenu');
 //rutas para envio de datos por post y get 
 // $routes->get('/obtenerNombre/(:any)', 'Crud::obtenerNombre/$1');
 // $routes->post('/crear', 'Crud::crear');
 
-
-
+//datesite
+$routes->post('/saveDatesite', 'Dashboard::saveDatesite');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
