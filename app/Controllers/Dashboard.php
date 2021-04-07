@@ -4,6 +4,7 @@ namespace App\Controllers;
 //use App\Models\Login_model;
 use App\Models\MenuModel;
 use App\Models\SubmenuModel;
+use App\Models\BasemenuModel;
 use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
@@ -161,39 +162,105 @@ public function showSubmenu(){
 	
 	$idm=$request->uri->getSegment(2);
 	$ids=$request->uri->getSegment(3);
-	print_r($idm);
-	print_r($ids);
-	
+		
 	if(empty($idm)|| empty($ids)){return redirect()->to(base_url('menu'));}
 
 	//verificar si el identificador tiene registro, de lo contrario redireccionar al menú principal
 	$consulta=$this->db->query("SELECT m.idm, m.descm, m.status, m.created_at, m.updated_at, m.edita, p.app, p.nomp from menu m, personal p WHERE m.edita=p.idp and m.idm=$idm");
 	$menu=$consulta->getRow();
-	$existe = $consulta->getNumRows();
-	if($existe==0){return redirect()->to(base_url('menu'));}
-	//fin de verificacion de existencia del registro
+	$existem = $consulta->getNumRows();
 	
-	//verificar si el identificador tiene registro, de lo contrario redireccionar al menú principal
-	$consulta=$this->db->query("SELECT m.idm, m.descm, m.status, m.created_at, m.updated_at, m.edita, p.app, p.nomp from menu m, personal p WHERE m.edita=p.idp and m.idm=$idm");
-	$menu=$consulta->getRow();
-	$existe = $consulta->getNumRows();
-	if($existe==0){return redirect()->to(base_url('menu'));}
 	//fin de verificacion de existencia del registro
 
-	// $sconsulta=$this->db->query("SELECT * FROM submenu WHERE idm=$idm");
-	// $submenu=$sconsulta->getResult();
-	// $data=[
-	// 	'uri'=> current_url(true),
-	// 	'idm'=> $idm,
-	// 	'menu'=> $menu,
-	// 	'submenu'=> $submenu
-	// ];
+	//verificar si el identificador tiene registro, de lo contrario redireccionar al menú principal
+	$consulta=$this->db->query("SELECT s.ids, s.descs, s.status, s.created_at, s.updated_at, s.modifica, s.idm, p.app, p.nomp from submenu s, personal p WHERE s.modifica=p.idp and s.ids=$ids");
+	$submenu=$consulta->getRow();
+	$existes = $consulta->getNumRows();
+	if(($existem==0)||($existes==0)){return redirect()->to(base_url('menu'));}
+	//fin de verificacion de existencia del registro
+
+	$sconsulta=$this->db->query("SELECT * FROM basemenu WHERE ids=$ids");
+	$basemenu=$sconsulta->getResult();
+	$data=[
+		'uri'=> current_url(true),
+		'idm'=> $idm,
+		'ids'=> $ids,
+		'basemenu'=> $basemenu,
+		'menu'=> $menu,
+		'submenu'=> $submenu
+	];
 	// //var_dump($idm);
 
-	// if (!session('guyus')) {return redirect()->to(base_url('/'));}
-	// return view('dashboard/menushow',$data);
+	if (!session('guyus')) {return redirect()->to(base_url('/'));}
+	return view('dashboard/submenushow',$data);
 }
 //FIN DE DATOS DE SUBMENU
+
+//INICIO DE ACTUALIZACION DE SUBMENU
+public function updatesSubmenu(){
+	print_r($_POST);
+	 $SubmenuModel=new SubmenuModel($db);
+	$request= \Config\Services::request();
+	if(empty($request->getPostGet('status'))){$status=0;}else{$status=1;}
+	$data=array(
+		'ids'=>$request->getPostGet('ids'),
+		'status'=>$status,
+		'descs'=>$request->getPostGet('descs'),
+		'modifica'=>$request->getPostGet('edita'),
+	);
+	if($SubmenuModel->save($data)===false){
+		//var_dump($menuModel->errors());
+		echo 0;
+	}else{
+		echo 1;
+	}
+}
+
+//FIN DE ACTUALIZACION DE SUBMENU
+//INICIO DE ACTUALIZACION DE BASEMENU
+public function updateBasemenu(){
+	print_r($_POST);
+	 $BasemenuModel=new BasemenuModel($db);
+	$request= \Config\Services::request();
+	if(empty($request->getPostGet('status'))){$status=0;}else{$status=1;}
+	$data=array(
+		'idb'=>$request->getPostGet('idb'),
+		'status'=>$status,
+		'descb'=>$request->getPostGet('descb'),
+		'edita'=>$request->getPostGet('edita'),
+	);
+	if($BasemenuModel->save($data)===false){
+		//var_dump($menuModel->errors());
+		echo 0;
+	}else{
+		echo 1;
+	}
+}
+
+//FIN DE ACTUALIZACION DE BASEMENU
+
+//INICIO DE ALTA DE BASEMENU
+public function newBasemenu(){
+	print_r($_POST);
+	 $BasemenuModel=new BasemenuModel($db);
+	$request= \Config\Services::request();
+	if(empty($request->getPostGet('status'))){$status=0;}else{$status=1;}
+	$data=array(
+		'descb'=>$request->getPostGet('descb'),
+		'status'=>$status,
+		'ids'=>$request->getPostGet('ids'),
+		'edita'=>$request->getPostGet('edita')
+	);
+	if($BasemenuModel->save($data)===false){
+		//var_dump($menuModel->errors());
+		echo 0;
+	}else{
+		echo 1;
+	}
+}
+
+//FIN DE ALTA DE BASEMENU
+
 	public function borraMenu(){
 		$request= \Config\Services::request();
 		$idm=$request->getPostGet('idm');
@@ -204,6 +271,20 @@ public function showSubmenu(){
 		// }else{
 		// 	echo 0;
 		// }
+		//var_dump($borrar);
+		//var_dump($deleted->errors());
+	}
+
+	public function delBasemenu(){
+		$request= \Config\Services::request();
+		$idb=$request->getPostGet('idb');
+		
+		$borrar= $this->db->query("delete from basemenu where idb=$idb");
+		if($borrar){
+			echo 1;
+		}else{
+			echo 0;
+		}
 		//var_dump($borrar);
 		//var_dump($deleted->errors());
 	}

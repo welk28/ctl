@@ -11,7 +11,7 @@ class BasemenuModel extends Model
 	protected $primaryKey           = 'idb';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDelete        = false;
 	
 	protected $allowedFields        = ['descb','status','ids','edita'];
 
