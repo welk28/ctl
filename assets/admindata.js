@@ -12,11 +12,54 @@ function agregaform(datos) {
     $("#statusup").prop("checked", true);
   }
 }
+function agregaformdepto(datos) {
+  //alert("dentro de modificar");
+  $('#frmaddDepto')[0].reset();
+  d = datos.split('||');
+
+  $('#idepto').val(d[0]);
+  $('#nomdeptou').val(d[1]);
+
+
+  var status = d[2];
+  if (status == 1) {
+    $("#statusu").prop("checked", true);
+  }
+}
+function agregaformCargo(datos) {
+  //alert("dentro de modificar");
+  $('#frmupdateCargo')[0].reset();
+  d = datos.split('||');
+
+  $('#idrcu').val(d[0]);
+  $('#desccu').val(d[1]);
+
+
+  var status = d[2];
+  if (status == 1) {
+    $("#statusu").prop("checked", true);
+  }
+}
+
+function agregaformGiro(datos) {
+  //alert("dentro de modificar");
+  $('#frmupdateGiroemp')[0].reset();
+  d = datos.split('||');
+
+  $('#idgi').val(d[0]);
+  $('#descg').val(d[1]);
+
+
+  var status = d[2];
+  if (status == 1) {
+    $("#statusu").prop("checked", true);
+  }
+}
 
 $(document).ready(function () {
-  $('.solo-numero').keyup(function (){
-		this.value = (this.value + '').replace(/[^0-9]/g, '');
-	});
+  $('.solo-numero').keyup(function () {
+    this.value = (this.value + '').replace(/[^0-9]/g, '');
+  });
   //Swal.fire('Any fool can use a computer');
 
   $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
@@ -212,8 +255,8 @@ $(document).ready(function () {
     });
   });
   //FIN de ALTA de BASEmenú
-//------------------------------------------------------------------------------------------
-//SECCION DE BORRADO DE REGISTROS
+  //------------------------------------------------------------------------------------------
+  //SECCION DE BORRADO DE REGISTROS
 
 
   //INICIO DE BORRA BASEMENU
@@ -304,8 +347,8 @@ $(document).ready(function () {
     })
   });
   //fin de borrado de SUBmenu
-  
-  
+
+
   //borrar de MENU
   $(".frmborramenu").submit(function (e) {
     e.preventDefault();
@@ -348,4 +391,455 @@ $(document).ready(function () {
     })
   });
   //fin de borrado de MENU
+  //INICIO de actualización de SATESITE
+  $("#frmDatesiteupdate").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmDatesiteupdate").attr("action"),
+      type: $("#frmDatesiteupdate").attr("method"),
+      data: $("#frmDatesiteupdate").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          alertify.error('Error al guardar');
+        } else {
+          alertify.success('Guardado');
+          //alertify.success(fecha);
+        }
+      }
+    });
+  });
+  //FIN de actualización de DATESITE
+  // INICIO ALTA DE DEPARTAMENTO 
+  $("#frmaddDepto").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmaddDepto").attr("action"),
+      type: $("#frmaddDepto").attr("method"),
+      data: $("#frmaddDepto").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ALTA DE DEPARTAMENTO
+
+  // INICIO MODIFICA DE DEPARTAMENTO 
+  $("#frmupdateDepto").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmupdateDepto").attr("action"),
+      type: $("#frmupdateDepto").attr("method"),
+      data: $("#frmupdateDepto").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE MODIFICA DE DEPARTAMENTO
+  //INICIO DE BORRA DEPARTAMENTO
+  $(document).on("click", "#listax .btn-borrabm", function () {
+    var idepto = $(this).closest("tr").find(".idepto").val();
+    var base_url = $(this).closest("tr").find(".base_urlb").val();
+    //alertify.success(base_url);
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el registro, con ello tambien los que tenga ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //     swal.fire("aqui debera estar la validacion del Ajax");
+        cadena = "idepto=" + idepto +
+          "&base_url=" + base_url;
+        $.ajax({
+          url: base_url,
+          type: "POST",
+          data: cadena,
+          success: function (response) {
+            //alert(response);
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //FIN DE BORRADO DEPARTAMENTO
+  // INICIO ALTA DE ROL GENERAL 
+  $("#frmaddRolgral").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmaddRolgral").attr("action"),
+      type: $("#frmaddRolgral").attr("method"),
+      data: $("#frmaddRolgral").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ALTA DE ROL GENERAL
+
+  // INICIO ALTA DE CARGO 
+  $("#frmaddCargo").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmaddCargo").attr("action"),
+      type: $("#frmaddCargo").attr("method"),
+      data: $("#frmaddCargo").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ALTA DE CARGO
+  // INICIO ACTUALIZACION  DE CARGO 
+  $("#frmupdateCargo").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmupdateCargo").attr("action"),
+      type: $("#frmupdateCargo").attr("method"),
+      data: $("#frmupdateCargo").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ACTUALIZACION  DE CARGO
+  //INICIO DE BORRA cargo
+  $(document).on("click", "#listax .btn-borracargo", function () {
+    var idrc = $(this).closest("tr").find(".idrc").val();
+    var base_url = $(this).closest("tr").find(".base_urlb").val();
+    //alertify.success(base_url);
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el registro, con ello tambien los que tenga ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //     swal.fire("aqui debera estar la validacion del Ajax");
+        cadena = "idrc=" + idrc +
+          "&base_url=" + base_url;
+          //alert(base_url);
+        $.ajax({
+          url: base_url,
+          type: "POST",
+          data: cadena,
+          success: function (response) {
+           
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //FIN DE BORRADO rolgeneral
+
+  //borrar de ROL GENERAL
+  $(".frmborrRolgral").submit(function (e) {
+    e.preventDefault();
+    //Swal.fire('mensaje');
+
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el submenú, con ello tambien las basemenú ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //swal.fire("aqui debera estar la validacion del Ajax");
+        $.ajax({
+          url: $(".frmborrRolgral").attr("action"),
+          type: $(".frmborrRolgral").attr("method"),
+          data: $(".frmborrRolgral").serialize(),
+          success: function (response) {
+            //alert(response);
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //fin de borrado de rolgeneral
+  // INICIO ACTUALIZACION DE  ROL GENERAL
+  $("#frmupdateRole").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmupdateRole").attr("action"),
+      type: $("#frmupdateRole").attr("method"),
+      data: $("#frmupdateRole").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ACTUALIZACION DE ROL GENERAL
+
+  // INICIO ALTA DE GIRO EMPRESARIAL 
+  $("#frmaddEmpre").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmaddEmpre").attr("action"),
+      type: $("#frmaddEmpre").attr("method"),
+      data: $("#frmaddEmpre").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ALTA DE GIRO EMPRESARIAL
+
+  // INICIO ACTUALIZACION DE GIRO EMPRESARIAL 
+  $("#frmupdateGiroemp").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmupdateGiroemp").attr("action"),
+      type: $("#frmupdateGiroemp").attr("method"),
+      data: $("#frmupdateGiroemp").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ACTUALIZACION DE GIRO EMPRESARIAL
+
+  //INICIO DE BORRA GIRO EMPRESARIAL
+  $(document).on("click", "#listax .btn-borraGiro", function () {
+    var idgi = $(this).closest("tr").find(".idgi").val();
+    var base_url = $(this).closest("tr").find(".base_urlb").val();
+    //alertify.success(base_url);
+    Swal.fire({
+      title: 'Está seguro de borrar?',
+      text: "Esta acción borrará el registro, con ello tambien los que tenga ligados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //     swal.fire("aqui debera estar la validacion del Ajax");
+        cadena = "idgi=" + idgi +
+          "&base_url=" + base_url;
+          //alert(base_url);
+        $.ajax({
+          url: base_url,
+          type: "POST",
+          data: cadena,
+          success: function (response) {
+           
+
+            if (response == 1) {
+              Swal.fire(
+                'Eliminado!', 'Eliminado con éxito!', 'success');
+
+              setTimeout(function () {
+                location.reload();
+              }, 800);
+            } else {
+              swal.fire("Error al borrar", "Verifique los datos ingresados", "warning");
+            }
+          }
+        });
+
+
+      }
+    })
+  });
+  //FIN DE BORRADO GIRO EMPRESARIAL
 });

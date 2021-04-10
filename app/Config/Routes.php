@@ -40,9 +40,7 @@ $routes->add('/logout', 'Auth::logout');
 $routes->add('/dashboard', 'Dashboard::index');
 $routes->add('/menu', 'Dashboard::menu');
 $routes->add('/datesite', 'Dashboard::Datesite');
-$routes->add('/depto', 'Dashboard::Depto');
-$routes->add('/role', 'Dashboard::Role');
-$routes->add('/business', 'Dashboard::Business');
+$routes->add('/empresarial', 'Dashboard::empresarial');
 $routes->add('/publications', 'Dashboard::Publications');
 $routes->add('/newpublication', 'Dashboard::NewPublication');
 
@@ -61,12 +59,46 @@ $routes->post('/delSubmenu', 'Dashboard::delSubmenu');
 $routes->post('/newBasemenu', 'Dashboard::newBasemenu');
 $routes->post('/updatesSubmenu', 'Dashboard::updatesSubmenu');
 $routes->post('/delBasemenu', 'Dashboard::delBasemenu');
+
+//datesite
+$routes->post('/saveIcono', 'Dashboard::saveIcono');
+$routes->post('/saveDatesite', 'Dashboard::saveDatesite');
+
+//departamento
+$routes->add('/Departamento', 'Dashboard::Departamento');
+$routes->post('/addDepto', 'Dashboard::addDepto');
+$routes->post('/updateDepto', 'Dashboard::updateDepto');
+$routes->post('/delDepto', 'Dashboard::delDepto');
+
+//rol de usuarios
+$routes->add('/role', 'Dashboard::Role');
+$routes->post('/addRolgral', 'Dashboard::addRolgral');
+$routes->post('/updateRole', 'Dashboard::updateRole');
+
+$routes->post('/borrRolgral', 'Dashboard::borrRolgral');
+$routes->get('/role/(:any)', 'Dashboard::showRole/$1');
+
+//cargo
+$routes->post('/addCargo', 'Dashboard::addCargo');
+$routes->post('/updateCargo', 'Dashboard::updateCargo');
+$routes->post('/delCargo', 'Dashboard::delCargo');
+
+
+//Giro empresarial
+$routes->post('/addEmpre', 'Dashboard::addEmpre');
+$routes->post('/updateGiroemp', 'Dashboard::updateGiroemp');
+$routes->post('/delGiroemp', 'Dashboard::delGiroemp');
+
+
+//PERSONAL USUARIOS
+$routes->get('/personal', 'Personal::index');
+$routes->get('/personal/(:any)', 'Personal::personal/$1');
 //rutas para envio de datos por post y get 
 // $routes->get('/obtenerNombre/(:any)', 'Crud::obtenerNombre/$1');
 // $routes->post('/crear', 'Crud::crear');
 
-//datesite
-$routes->post('/saveDatesite', 'Dashboard::saveDatesite');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

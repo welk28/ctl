@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Rol General de usuarios y desglose de Cargos </h1>
+        <h1 class="m-0 text-dark">Alta de personal </h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="<?php echo base_url('/dashboard') ?>">Inicio</a></li>
 
-          <li class="breadcrumb-item active">Op. de <?= $uri->getSegment(1) ?></li>
+          <li class="breadcrumb-item active"> <?= $uri->getSegment(1) ?></li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -58,94 +58,67 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <!-- inicio de despliegue de datatable -->
-
-                  <?php if (empty($rolgral)) : ?>
-                    <div class="alert alert-warning alert-dismissible">
-                      <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                      No hay datos para mostrar
+              <!-- inicio de despliegue de formuario de alta -->
+              <form action="" method="post">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Seleccione el rol general del usuario</label>
+                      <select class="form-control select2bs4" style="width: 100%;" name="idrg" required>
+                        <option selected="selected" value="">Seleccione</option>
+                        <?php if (!empty($rolgral)) : ?>
+                          <?php foreach ($rolgral as $rg) : ?>
+                            <option value="<?= $rg->idrg ?>"><?= $rg->descrg ?></option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
                     </div>
-                  <?php else : ?>
 
-                    <table id="listax" class="table table-striped table-bordered table-sm" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>id</th>
-                          <th>Descripcion</th>
-                          <th>Status</th>
-                          <th>Cargos</th>
-                          <th>Fecha creación</th>
-                          <th>Ultima actualización</th>
-                          <th>Modificó</th>
-                          <th></th>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Seleccione el Cargo</label>
+                      <select class="form-control select2bs4" style="width: 100%;" name="idrg" required>
+                        <option selected="selected" value="">Seleccione</option>
+                        <?php if (!empty($rolcargo)) : ?>
+                          <?php foreach ($rolcargo as $rc) : ?>
+                            <option value="<?= $rc->idrc ?>"><?= $rc->descc ?></option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach ($rolgral as $de) : ?>
-                          <tr>
-                            <td><?= $de->idrg ?>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Departamento</label>
+                      <select class="form-control select2bs4" style="width: 100%;" name="idepto" required>
+                        <option selected="selected" value="">Seleccione</option>
+                        <?php if (!empty($departamentos)) : ?>
+                          <?php foreach ($departamentos as $d) : ?>
+                            <option value="<?= $d->idepto ?>"><?= $d->nomdepto ?></option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
 
-                            </td>
-                            <td>
-                              <?= $de->descrg ?>
-                            </td>
-                            <td align="center">
-                              <?php if ($de->status == 1) {
-                                echo "<i class='far fa-check-circle' style='color: green;'></i> ";
-                              } else {
-                                echo "<i class='far   fa-times-circle' style='color: red;'></i>";
-                              } ?></td>
-                            <td>
-                              <?php
-                              $db = \Config\Database::connect();
-                              $sub = $db->query("SELECT * FROM rolcargo WHERE idrg=$de->idrg");
-                              $cuantos = $sub->getNumRows();
-                              echo $cuantos;
-                              ?>
-                            </td>
-                            <td><?= $de->created_at ?></td>
-                            <td><?= $de->updated_at ?></td>
-                            <td><?= $de->app . " " . $de->nomp ?></td>
-                            <?php
-                            $datos = $de->idrg . "||" .
-                              $de->descrg . "||" .
-                              $de->status;
-                            ?>
-                            <td align="center">
-                              <div class="btn-group">
-                                <a href="<?php echo base_url(); ?>/role/<?= $de->idrg ?>" class="btn btn-success btn-xs" title="Ver los datos generales del rol"><i class="fas fa-th-list"></i></a>
-                                <!-- <button class="btn btn-warning btn-xs btn-borrabm" title="borrar">
-                                  <i class="far fa-trash-alt"></i>
-                                </button> -->
-                              </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Puesto</label>
+                      <select class="form-control select2bs4" style="width: 100%;" name="idpuesto" required>
+                        <option selected="selected" value="">Seleccione</option>
+                        <?php if (!empty($puestos)) : ?>
+                          <?php foreach ($puestos as $p) : ?>
+                            <option value="<?= $p->idpuesto ?>"><?= $p->descpuesto ?></option>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
 
-
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>id</th>
-                          <th>Descripcion</th>
-
-
-                          <th>Status</th>
-                          <th>Cargos</th>
-                          <th>Fecha creación</th>
-                          <th>Ultima actualización</th>
-                          <th>Modificó</th>
-                          <th></th>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  <?php endif; ?>
-                  <!-- fin de despliegue de datatabla -->
-                </div>
-              </div>
+                  </div>
+              </form>
+              <!-- fin de despliegue de formuario de alta -->
             </div>
             <!-- /.card-body -->
 
@@ -163,8 +136,7 @@
   <!-- /.card -->
 
 
-  </div> -->
-  <!--/. container-fluid -->
+  
 </section>
 <!-- /.content -->
 <div class="modal fade" id="addRolgral">

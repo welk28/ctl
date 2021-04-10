@@ -46,19 +46,20 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body pb-3 ">
-              <form id="frmcargaIcono" action="<?php echo base_url('/upIcono') ?>" method="post" >
+              <form id="frmcargaIcono" action="<?php echo base_url('/saveIcono') ?>" method="post" enctype="multipart/form-data">
                 <div class="row justify-content-md-center mt-3 align-items-center">
                   <div class="col-sm-2">
-                    <img src="<?php echo base_url() ?>/public/uploads/<?= $datos->icono ?>" alt="">
+                    <img src="<?php echo base_url() ?>/public/uploads/<?= $datos->icono ?>" alt="Icono actual" width="90">
                   </div>
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>Icono de sitio</label>
-                      <input type="file" class="form-control-file" name="icono">
+                      <input type="file" class="form-control-file" name="icono" required>
+                      <input type="hidden" class="form-control form-control-sm" id="id" value="<?= $datos->id ?>" readonly name="id">
                     </div>
                   </div>
                   <div class="col-sm-2">
-                  <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+                    <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
                   </div>
                 </div>
               </form>
@@ -69,7 +70,7 @@
           <!--/.direct-chat -->
         </div>
       </div>
-      <form action="<?php echo base_url('/saveDatesite') ?>" method="post" enctype="multipart/form-data">
+      <form id="frmDatesiteupdate" action="<?php echo base_url('/saveDatesite') ?>" method="post">
 
         <div class="row">
           <div class="col-sm">
@@ -77,9 +78,9 @@
               <label>Titulo principal de la página</label><br>
               <small>Aparece en la pestaña del navegador</small>
               <input type="text" class="form-control" value="<?= $datos->titulo ?>" placeholder="Introduzca el título" name="titulo" required>
-              <input type="text" class="form-control form-control-sm" id="edita" value="<?= session('idp'); ?>" readonly name="edita">
-              <input type="text" class="form-control form-control-sm" id="id" value="<?= $datos->id ?>" readonly name="id">
-              <input type="text" class="form-control form-control-sm" id="icono2" value="<?= $datos->icono ?>" readonly name="icono2">
+              <input type="hidden" class="form-control form-control-sm" id="edita" value="<?= session('idp'); ?>" readonly name="edita">
+              <input type="hidden" class="form-control form-control-sm" id="id" value="<?= $datos->id ?>" readonly name="id">
+
             </div>
           </div>
         </div>
@@ -129,7 +130,7 @@
         </div>
         <div class="row justify-content-center mt-3">
           <div class="col-sm-4">
-            <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
           </div>
         </div>
 
@@ -153,4 +154,7 @@
   <!--/. container-fluid -->
 </section>
 <!-- /.content -->
+
+
+
 <?= $this->endsection() ?>

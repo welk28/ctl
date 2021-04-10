@@ -13,7 +13,7 @@ class DatesiteModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes        = false;
 	
-	protected $allowedFields        = ['icono', 'titulo','mail','fb','tw','ig','telof','telc','modifica',];
+	protected $allowedFields        = ['icono', 'titulo','mail','fb','tw','ig','telof','telc','edita',];
 
 	// Dates
 	protected $useTimestamps        = true;

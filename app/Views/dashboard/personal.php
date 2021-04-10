@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Rol General de usuarios y desglose de Cargos </h1>
+        <h1 class="m-0 text-dark">Personal registrado en <b><?= $rol->descrg ?></b> </h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="<?php echo base_url('/dashboard') ?>">Inicio</a></li>
 
-          <li class="breadcrumb-item active">Op. de <?= $uri->getSegment(1) ?></li>
+          <li class="breadcrumb-item active"> <?= $uri->getSegment(1) ?></li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -29,14 +29,6 @@
 
     </div>
     <div class="card-body">
-
-      <!-- boton para crear nuevo -->
-      <!-- <div class="row justify-content-start mb-3">
-        <div class="col-2 ">
-          <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addRolgral">Rol General <i class="fas fa-plus-circle"></i></a>
-        </div>
-      </div> -->
-      <!-- fin de boton para crear  -->
 
       <!-- comienza listado de  -->
       <div class="row">
@@ -62,7 +54,7 @@
                 <div class="col">
                   <!-- inicio de despliegue de datatable -->
 
-                  <?php if (empty($rolgral)) : ?>
+                  <?php if (empty($personal)) : ?>
                     <div class="alert alert-warning alert-dismissible">
                       <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
                       No hay datos para mostrar
@@ -73,56 +65,64 @@
                       <thead>
                         <tr>
                           <th>id</th>
-                          <th>Descripcion</th>
-                          <th>Status</th>
-                          <th>Cargos</th>
-                          <th>Fecha creación</th>
-                          <th>Ultima actualización</th>
-                          <th>Modificó</th>
+                          <th>Usuario</th>
+                          <th>Nombre</th>
+                          <th>Correo</th>
+                          <th>Cargo</th>
+                          <th>Departamento</th>
+                          <th>Puesto</th>
+                          <?php if ($rol->idrg != 1 || $rol->idrg != 2) : ?>
+                            <th>Giro empr</th>
+                            <th>Estado</th>
+                          <?php endif; ?>
+                          <th>status</th>
+                          <?php if ($rol->idrg == 4) : ?>
+                            <th>Publica en</th>
+                          <?php endif; ?>
                           <th></th>
-
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($rolgral as $de) : ?>
+                        <?php foreach ($personal as $p) : ?>
                           <tr>
-                            <td><?= $de->idrg ?>
+                            <td><?= $p->idp ?></td>
+                            <td><?= $p->usuario ?></td>
+                            <td><?= $p->app . " " . $p->nomp ?></td>
+                            <td><?= $p->email ?></td>
 
-                            </td>
-                            <td>
-                              <?= $de->descrg ?>
-                            </td>
+                            <td><?= $p->descc ?></td>
+                            <td><?= $p->nomdepto ?></td>
+                            <td><?= $p->descpuesto ?></td>
+                            <?php if ($rol->idrg != 1 || $rol->idrg != 2) : ?>
+                              <td><?= $p->descg ?></td>
+                              <td><?= $p->estado ?></td>
+                            <?php endif; ?>
+
                             <td align="center">
-                              <?php if ($de->status == 1) {
+                              <?php if ($p->status == 1) {
                                 echo "<i class='far fa-check-circle' style='color: green;'></i> ";
                               } else {
                                 echo "<i class='far   fa-times-circle' style='color: red;'></i>";
                               } ?></td>
-                            <td>
-                              <?php
-                              $db = \Config\Database::connect();
-                              $sub = $db->query("SELECT * FROM rolcargo WHERE idrg=$de->idrg");
-                              $cuantos = $sub->getNumRows();
-                              echo $cuantos;
-                              ?>
-                            </td>
-                            <td><?= $de->created_at ?></td>
-                            <td><?= $de->updated_at ?></td>
-                            <td><?= $de->app . " " . $de->nomp ?></td>
-                            <?php
-                            $datos = $de->idrg . "||" .
-                              $de->descrg . "||" .
-                              $de->status;
-                            ?>
+                            <?php if ($rol->idrg == 4) : ?>
+                              <td>
+                                <?php
+                                $db = \Config\Database::connect();
+                                $sub = $db->query("SELECT p.idp, p.idm, m.descm FROM pubasigna p, menu m WHERE p.idm=m.idm AND p.status=1 AND p.idp=$p->idp");
+                                $pubasigna = $sub->getResult();
+                                ?>
+                                <?php foreach($pubasigna as $pu):?>
+                                  <?= $pu->descm."<br>" ?>
+                                <?php endforeach;?>
+                              </td>
+                            <?php endif; ?>
                             <td align="center">
                               <div class="btn-group">
-                                <a href="<?php echo base_url(); ?>/role/<?= $de->idrg ?>" class="btn btn-success btn-xs" title="Ver los datos generales del rol"><i class="fas fa-th-list"></i></a>
-                                <!-- <button class="btn btn-warning btn-xs btn-borrabm" title="borrar">
+                                <a href="<?php echo base_url(); ?>/role/<?= $p->idp ?>" class="btn btn-success btn-xs" title="Ver los datos generales del rol"><i class="fas fa-th-list"></i></a>
+                                <button class="btn btn-warning btn-xs btn-borrabm" title="borrar">
                                   <i class="far fa-trash-alt"></i>
-                                </button> -->
+                                </button>
                               </div>
-
-
                             </td>
                           </tr>
                         <?php endforeach; ?>
@@ -130,14 +130,21 @@
                       <tfoot>
                         <tr>
                           <th>id</th>
-                          <th>Descripcion</th>
+                          <th>Usuario</th>
+                          <th>Nombre</th>
+                          <th>Correo</th>
+                          <th>Cargo</th>
+                          <th>Departamento</th>
+                          <th>Puesto</th>
+                          <?php if ($rol->idrg != 1 || $rol->idrg != 2 || $rol->idrg != 4) : ?>
+                            <th>Giro empr</th>
+                            <th>Estado</th>
+                          <?php endif; ?>
 
-
-                          <th>Status</th>
-                          <th>Cargos</th>
-                          <th>Fecha creación</th>
-                          <th>Ultima actualización</th>
-                          <th>Modificó</th>
+                          <th>status</th>
+                          <?php if ($rol->idrg == 4) : ?>
+                            <th>Publica en</th>
+                          <?php endif; ?>
                           <th></th>
                         </tr>
                       </tfoot>

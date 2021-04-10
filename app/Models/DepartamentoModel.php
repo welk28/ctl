@@ -11,7 +11,7 @@ class DepartamentoModel extends Model
 	protected $primaryKey           = 'idepto';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDelete        = false;
 	
 	protected $allowedFields        = ['nomdepto','status','edita'];
 

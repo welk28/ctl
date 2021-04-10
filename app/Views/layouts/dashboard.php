@@ -49,6 +49,8 @@ $dsite = $consulta->getRow();
    <!-- Alertify -->
  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/alertify.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/assets/alertifyjs/css/themes/default.css">
+  <!-- Alertify -->
+ <script src="<?php echo base_url() ?>/assets/alertifyjs/alertify.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
@@ -118,7 +120,7 @@ $dsite = $consulta->getRow();
 <!-- bs-custom-file-input -->
 <script src="<?php echo base_url() ?>/assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
  <!-- Alertify -->
- <script src="<?php echo base_url() ?>/assets/alertifyjs/alertify.js"></script>
+ 
 
 </body>
 
@@ -134,6 +136,7 @@ $dsite = $consulta->getRow();
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
+
     
     $('.textarea').summernote()
 

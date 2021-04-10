@@ -11,7 +11,7 @@ class RolgralModel extends Model
 	protected $primaryKey           = 'idrg';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDelete        = false;
 	
 	protected $allowedFields        = ['descrg', 'status','modifica'];
 

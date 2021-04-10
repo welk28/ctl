@@ -11,7 +11,7 @@ class RolcargoModel extends Model
 	protected $primaryKey           = 'idrc';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDelete        = false;
 	
 	protected $allowedFields        = ['descc', 'status', 'idrg', 'modifica'];
 

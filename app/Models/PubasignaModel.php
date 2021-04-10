@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GiroempModel extends Model
+class PubasignaModel extends Model
 {
 	
-	protected $table                = 'giroemp';
-	protected $primaryKey           = 'idgi';
+	protected $table                = 'pubasigna';
+	protected $primaryKey           = 'idp';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = false;
+	protected $useSoftDeletes = false;
 	
-	protected $allowedFields        = ['descg','status','edita'];
+	protected $allowedFields        = ['idm','status','edita'];
 
 	// Dates
 	protected $useTimestamps        = true;

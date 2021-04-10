@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Rol General de usuarios y desglose de Cargos </h1>
+        <h1 class="m-0 text-dark">Lista de Departamentos </h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -30,15 +30,15 @@
     </div>
     <div class="card-body">
 
-      <!-- boton para crear nuevo -->
-      <!-- <div class="row justify-content-start mb-3">
+      <!-- boton para crear nuevo submenu -->
+      <div class="row justify-content-start mb-3">
         <div class="col-2 ">
-          <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addRolgral">Rol General <i class="fas fa-plus-circle"></i></a>
+          <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addDepto">Departamento <i class="fas fa-plus-circle"></i></a>
         </div>
-      </div> -->
-      <!-- fin de boton para crear  -->
+      </div>
+      <!-- fin de boton para crear submenu -->
 
-      <!-- comienza listado de  -->
+      <!-- comienza listado de submenu -->
       <div class="row">
         <div class="col-md-12">
           <!-- DIRECT CHAT PRIMARY -->
@@ -62,7 +62,7 @@
                 <div class="col">
                   <!-- inicio de despliegue de datatable -->
 
-                  <?php if (empty($rolgral)) : ?>
+                  <?php if (empty($departamento)) : ?>
                     <div class="alert alert-warning alert-dismissible">
                       <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
                       No hay datos para mostrar
@@ -74,8 +74,9 @@
                         <tr>
                           <th>id</th>
                           <th>Descripcion</th>
+
+
                           <th>Status</th>
-                          <th>Cargos</th>
                           <th>Fecha creación</th>
                           <th>Ultima actualización</th>
                           <th>Modificó</th>
@@ -84,13 +85,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($rolgral as $de) : ?>
+                        <?php foreach ($departamento as $de) : ?>
                           <tr>
-                            <td><?= $de->idrg ?>
-
+                            <td><?= $de->idepto ?> 
+                            <input class="form-control form-control-sm idepto" type="hidden" size="3" maxlength="2" name="tr1" style="width: 50px; text-align: right;" value="<?= $de->idepto?>">
+                            <input class="form-control form-control-sm base_urlb" type="hidden" name="base_urlb" value="<?php echo base_url('/delDepto') ?>">
                             </td>
                             <td>
-                              <?= $de->descrg ?>
+                              <?= $de->nomdepto ?>
                             </td>
                             <td align="center">
                               <?php if ($de->status == 1) {
@@ -98,28 +100,22 @@
                               } else {
                                 echo "<i class='far   fa-times-circle' style='color: red;'></i>";
                               } ?></td>
-                            <td>
-                              <?php
-                              $db = \Config\Database::connect();
-                              $sub = $db->query("SELECT * FROM rolcargo WHERE idrg=$de->idrg");
-                              $cuantos = $sub->getNumRows();
-                              echo $cuantos;
-                              ?>
-                            </td>
                             <td><?= $de->created_at ?></td>
                             <td><?= $de->updated_at ?></td>
-                            <td><?= $de->app . " " . $de->nomp ?></td>
-                            <?php
-                            $datos = $de->idrg . "||" .
-                              $de->descrg . "||" .
+                            <td><?= $de->app." ".$de->nomp ?></td>
+                            <?php 
+                              $datos=$de->idepto."||".
+                              $de->nomdepto."||".
                               $de->status;
                             ?>
                             <td align="center">
                               <div class="btn-group">
-                                <a href="<?php echo base_url(); ?>/role/<?= $de->idrg ?>" class="btn btn-success btn-xs" title="Ver los datos generales del rol"><i class="fas fa-th-list"></i></a>
-                                <!-- <button class="btn btn-warning btn-xs btn-borrabm" title="borrar">
-                                  <i class="far fa-trash-alt"></i>
-                                </button> -->
+                              <button class="btn btn-success btn-xs" title="modificar" data-toggle="modal" data-target="#updateDepto" onclick="agregaformdepto('<?php echo $datos ?>')">
+                                <i class="fas fa-pencil-alt"></i>
+                              </button> 
+                              <button class="btn btn-warning btn-xs btn-borrabm" title="borrar" >
+                              <i class="far fa-trash-alt"></i>
+                              </button> 
                               </div>
 
 
@@ -134,7 +130,6 @@
 
 
                           <th>Status</th>
-                          <th>Cargos</th>
                           <th>Fecha creación</th>
                           <th>Ultima actualización</th>
                           <th>Modificó</th>
@@ -167,16 +162,16 @@
   <!--/. container-fluid -->
 </section>
 <!-- /.content -->
-<div class="modal fade" id="addRolgral">
+<div class="modal fade" id="addDepto">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Agregue nuevo Rol General</h4>
+        <h4 class="modal-title">Agregue nuevo Departamento</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="frmaddRolgral" action="<?php echo base_url('/addRolgral') ?>" method="post">
+      <form id="frmaddDepto" action="<?php echo base_url('/addDepto') ?>" method="post">
         <div class="modal-body">
           <div class="row">
             <div class="col-sm">
@@ -189,10 +184,10 @@
           <div class="row mt-2">
             <div class="col-sm">
               <div class="form-group">
-                <label for="descm">Nombre del Rol General</label>
-                <input type="text" class="form-control form-control-sm" id="descrg" value="" name="descrg" required>
-
-                <input type="hidden" class="form-control form-control-sm" id="modifica" value="<?= session('idp'); ?>" readonly name="modifica">
+                <label for="descm">Nombre de departamento</label>
+                <input type="text" class="form-control form-control-sm" id="nomdepto" value="" name="nomdepto" required>
+                
+                <input type="hidden" class="form-control form-control-sm" id="edita" value="<?= session('idp'); ?>" readonly name="edita">
               </div>
             </div>
           </div>
@@ -211,7 +206,7 @@
 <!-- /.modal -->
 
 <!-- modal para modificacion -->
-<div class="modal fade" id="updateRolgral">
+<div class="modal fade" id="updateDepto">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -220,13 +215,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="frmupdateRolgral" action="<?php echo base_url('/updateRolgral') ?>" method="post">
+      <form id="frmupdateDepto" action="<?php echo base_url('/updateDepto') ?>" method="post">
         <div class="modal-body">
           <div class="row">
             <div class="col-sm">
               <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success align-items-center">
                 <input name="status" type="checkbox" class="custom-control-input" id="statusu" checked>
-                <label class="custom-control-label" for="statusn">Status</label>
+                <label class="custom-control-label" for="statusu">Status</label>
               </div>
             </div>
           </div>
@@ -234,10 +229,10 @@
             <div class="col-sm">
               <div class="form-group">
                 <label for="descm">Nombre de departamento</label>
-                <input type="text" class="form-control form-control-sm" id="descrg" value="" name="descrg" required>
-                <input type="text" class="form-control form-control-sm" id="idrg" value="" name="idrg" required>
-
-                <input type="text" class="form-control form-control-sm" id="modifica" value="<?= session('idp'); ?>" readonly name="modifica">
+                <input type="text" class="form-control form-control-sm" id="nomdeptou" value="" name="nomdepto" required>
+                <input type="hidden" class="form-control form-control-sm" id="idepto" value="" name="idepto" required>
+                
+                <input type="hidden" class="form-control form-control-sm" id="editau" value="<?= session('idp'); ?>" readonly name="edita">
               </div>
             </div>
           </div>

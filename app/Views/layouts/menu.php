@@ -3,6 +3,9 @@ $db = \Config\Database::connect();
 $consulta = $db->query("SELECT * FROM datesite WHERE id=1");
 $dsite = $consulta->getRow();
 
+$queryrol = $db->query("SELECT * FROM rolgral WHERE status=1 and deleted=0");
+$rol = $queryrol->getResult();
+
 ?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar elevation-4 sidebar-light-olive sidebar-collapse "> 
@@ -50,7 +53,7 @@ $dsite = $consulta->getRow();
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url('/depto') ?>" class="nav-link">
+                <a href="<?php echo base_url('/Departamento') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Departamento</p>
                 </a>
@@ -62,20 +65,14 @@ $dsite = $consulta->getRow();
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url('/business') ?>" class="nav-link">
+                <a href="<?php echo base_url('/empresarial') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Giro empresarial</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('/materias')?>" class="nav-link">
-              
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p>Personal</p>
-            </a>
-          </li>
+          
           <li class="nav-item">
             <a href="<?php echo base_url('/carrera')?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -85,60 +82,39 @@ $dsite = $consulta->getRow();
               </p>
             </a>
           </li>
+          <?php if(!empty($rol)):?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <!-- <i class="nav-icon fas fa-copy"></i> -->
+              <i class="nav-icon fas fa-users-cog"></i>
               <p>
-                Publicaciones
+                Personal
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url('/publications') ?>" class="nav-link">
+               
+                <a href="<?php echo base_url('/personal')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista</p>
+                  <p>Agregar Persoanal</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url('/newpublication') ?>" class="nav-link">
+              <?php foreach($rol as $r ):?>
+                <li class="nav-item">
+                <!-- <a href="<?php echo base_url('/publications') ?>" class="nav-link"> -->
+                <a href="<?php echo base_url('/personal')."/".$r->idrg?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Nueva publicación</p>
+                  <p><?=  $r->descrg?></p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li>
+              <?php endforeach;?>
+              
+                                
             </ul>
           </li>
+          <?php endif;?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
