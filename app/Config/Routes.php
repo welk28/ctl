@@ -93,11 +93,16 @@ $routes->post('/delGiroemp', 'Dashboard::delGiroemp');
 //PERSONAL USUARIOS
 $routes->get('/personal', 'Personal::index');
 $routes->get('/personal/(:any)', 'Personal::personal/$1');
+$routes->post('/llenaPuesto', 'Personal::getPuesto');
+$routes->post('/getUser', 'Personal::getUser');
+$routes->post('/getEmail', 'Personal::getEmail');
+$routes->post('/addPersonal', 'Personal::addPersonal');
 //rutas para envio de datos por post y get 
 // $routes->get('/obtenerNombre/(:any)', 'Crud::obtenerNombre/$1');
-// $routes->post('/crear', 'Crud::crear');
 
-
+//rolcargo
+$routes->post('/llenarolcargo', 'Personal::getRolcargo');
+$routes->post('/savePersonal', 'Personal::savePersonal');
 
 /*
  * --------------------------------------------------------------------

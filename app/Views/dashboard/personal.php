@@ -71,7 +71,7 @@
                           <th>Cargo</th>
                           <th>Departamento</th>
                           <th>Puesto</th>
-                          <?php if ($rol->idrg != 1 || $rol->idrg != 2) : ?>
+                          <?php if (($rol->idrg != 1) && ($rol->idrg != 2)) : ?>
                             <th>Giro empr</th>
                             <th>Estado</th>
                           <?php endif; ?>
@@ -93,7 +93,7 @@
                             <td><?= $p->descc ?></td>
                             <td><?= $p->nomdepto ?></td>
                             <td><?= $p->descpuesto ?></td>
-                            <?php if ($rol->idrg != 1 || $rol->idrg != 2) : ?>
+                            <?php if ($rol->idrg != 1 && $rol->idrg != 2) : ?>
                               <td><?= $p->descg ?></td>
                               <td><?= $p->estado ?></td>
                             <?php endif; ?>
@@ -136,7 +136,7 @@
                           <th>Cargo</th>
                           <th>Departamento</th>
                           <th>Puesto</th>
-                          <?php if ($rol->idrg != 1 || $rol->idrg != 2 || $rol->idrg != 4) : ?>
+                          <?php if ($rol->idrg != 1 && $rol->idrg != 2 ) : ?>
                             <th>Giro empr</th>
                             <th>Estado</th>
                           <?php endif; ?>

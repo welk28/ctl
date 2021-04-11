@@ -11,7 +11,7 @@ class PersonalModel extends Model
 	protected $primaryKey           = 'idp';
 	
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = true;
+	protected $useSoftDelete        = false;
 	
 	protected $allowedFields        = ['usuario', 'contra', 'nomp', 'app', 'email', 'idpuesto', 'idedo', 'idgi', 'idm', 'idrc', 'status', 'edita'];
 

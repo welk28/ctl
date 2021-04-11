@@ -1,3 +1,102 @@
+
+function CargarRolcargo(val) {
+  //alert(val);
+  $.ajax({
+    type: "POST",
+    url: $('#dirolcargo').val(),
+    data: "idrg=" + val,
+    success: function (resp) {
+      $("#idrc").html(resp);
+
+    }
+  });
+  if ($('#idrg').val() != "") {
+    divA = document.getElementById("cargo");
+    divA.style.display = "";
+
+  } else {
+    divD = document.getElementById("cargo");
+    divD.style.display = "none";
+    divA = document.getElementById("departamento");
+    divA.style.display = "none";
+    divC = document.getElementById("puesto");
+    divC.style.display = "none";
+
+  }
+  if (val == 4) {
+    divB = document.getElementById("publicidad");
+    divB.style.display = "";
+    //poner required
+    $('#idedo').prop("required", true);
+    $('#idgi').prop("required", true);
+  } else {
+    divB = document.getElementById("publicidad");
+    divB.style.display = "none";
+    //quitar required
+    $('#idedo').removeAttr("required");
+    $('#idgi').removeAttr("required");
+  }
+}
+/// fin de carga de puesto
+//carga de departamento
+function CargarDepartamento(val) {
+  //alert(val);
+
+  if ($('#idrc').val() != "") {
+    divA = document.getElementById("departamento");
+    divA.style.display = "";
+    // 	divA = document.getElementById("matec");
+    // 	divA.style.display="none";
+    // 	divC = document.getElementById("doch");
+    // 	divC.style.display="none";
+    // 	divB = document.getElementById("botonh");
+    // 	divB.style.display="none";
+  } else {
+    divD = document.getElementById("departamento");
+    divD.style.display = "none";
+    divA = document.getElementById("puesto");
+    divA.style.display = "none";
+    // divC = document.getElementById("doch");
+    // divC.style.display="none";
+    // divB = document.getElementById("botonh");
+    // divB.style.display="none";
+  }
+
+}
+//fin carga de departamento
+//carga de puesto
+function CargarPuesto(val) {
+  //alert(val);
+  $.ajax({
+    type: "POST",
+    url: $('#dirpuesto').val(),
+    data: "idepto=" + val,
+    success: function (resp) {
+      $("#idpuesto").html(resp);
+
+    }
+  });
+  if ($('#idepto').val() != "") {
+    divA = document.getElementById("puesto");
+    divA.style.display = "";
+    // 	divA = document.getElementById("matec");
+    // 	divA.style.display="none";
+    // 	divC = document.getElementById("doch");
+    // 	divC.style.display="none";
+    // 	divB = document.getElementById("botonh");
+    // 	divB.style.display="none";
+  } else {
+    divD = document.getElementById("puesto");
+    divD.style.display = "none";
+    // divA = document.getElementById("matec");
+    // divA.style.display="none";
+    // divC = document.getElementById("doch");
+    // divC.style.display="none";
+    // divB = document.getElementById("botonh");
+    // divB.style.display="none";
+  }
+}
+//fin carga de puesto
 function agregaform(datos) {
   //alert("dentro de modificar");
   $('#frmupdateBasemenu')[0].reset();
@@ -57,6 +156,90 @@ function agregaformGiro(datos) {
 }
 
 $(document).ready(function () {
+  $("#escribe").keyup(function () {
+    $("#parrafo").text("Tecla soltada");
+  });
+
+  //inicia valida usuario
+  $("#usuario").keyup(function () {
+    // var contra = $('#contra').val();
+    var usuario = $('#usuario').val();
+    //alert(usuario);
+    $.ajax({
+      type: "POST",
+      url: $('#dirusuario').val(),
+      data: "usuario=" + usuario,
+      success: function (resp) {
+        //alert(resp);
+        //$("#idrc").html(resp);
+        if (resp == 0) {
+          $("#usuario").removeClass("is-invalid");
+          $("#usuario").addClass("is-valid");
+          $('#btnGuardaus').prop('disabled', false);
+        } else {
+          $("#usuario").removeClass("is-valid");
+          $("#usuario").addClass("is-invalid");
+          $('#btnGuardaus').prop('disabled', true);
+          //$('#btnGuardaus').attr("disabled","disabled") 
+        }
+      }
+    });
+  });
+  //fin validar usuario
+  //inicia valida email
+  $("#email").keyup(function () {
+    // var contra = $('#contra').val();
+    var email = $('#email').val();
+    //alert(usuario);
+    $.ajax({
+      type: "POST",
+      url: $('#diremail').val(),
+      data: "email=" + email,
+      success: function (resp) {
+        //alert(resp);
+        //$("#idrc").html(resp);
+        if (resp == 0) {
+          $("#email").removeClass("is-invalid");
+          $("#email").addClass("is-valid");
+          $('#btnGuardaus').prop('disabled', false);
+        } else {
+          $("#email").removeClass("is-valid");
+          $("#email").addClass("is-invalid");
+          $('#btnGuardaus').prop('disabled', true);
+          //$('#btnGuardaus').attr("disabled","disabled") 
+        }
+      }
+    });
+  });
+  //fin validar email
+  $("#contrav").keyup(function () {
+    var contra = $('#contra').val();
+    var contrav = $('#contrav').val();
+    if (contra == contrav) {
+      $("#contrav").removeClass("is-invalid");
+      $("#contrav").addClass("is-valid");
+      $("#contra").removeClass("is-invalid");
+      $("#contra").addClass("is-valid");
+    } else {
+      $("#contrav").removeClass("is-valid");
+      $("#contrav").addClass("is-invalid");
+      $("#contra").removeClass("is-valid");
+      $("#contra").addClass("is-invalid");
+    }
+    //alert(contra);
+    //$("#parrafo").text("Tecla soltada");
+  });
+  $("#contra").keyup(function () {
+
+    $("#contrav").val("");
+    $("#contrav").removeClass("is-valid");
+    $("#contrav").removeClass("is-invalid");
+    $("#contra").removeClass("is-valid");
+    $("#contra").removeClass("is-invalid");
+    //alert(contra);
+    //$("#parrafo").text("Tecla soltada");
+  });
+
   $('.solo-numero').keyup(function () {
     this.value = (this.value + '').replace(/[^0-9]/g, '');
   });
@@ -632,13 +815,13 @@ $(document).ready(function () {
         //     swal.fire("aqui debera estar la validacion del Ajax");
         cadena = "idrc=" + idrc +
           "&base_url=" + base_url;
-          //alert(base_url);
+        //alert(base_url);
         $.ajax({
           url: base_url,
           type: "POST",
           data: cadena,
           success: function (response) {
-           
+
 
             if (response == 1) {
               Swal.fire(
@@ -816,13 +999,13 @@ $(document).ready(function () {
         //     swal.fire("aqui debera estar la validacion del Ajax");
         cadena = "idgi=" + idgi +
           "&base_url=" + base_url;
-          //alert(base_url);
+        //alert(base_url);
         $.ajax({
           url: base_url,
           type: "POST",
           data: cadena,
           success: function (response) {
-           
+
 
             if (response == 1) {
               Swal.fire(
@@ -842,4 +1025,35 @@ $(document).ready(function () {
     })
   });
   //FIN DE BORRADO GIRO EMPRESARIAL
+  // INICIO ALTA DE GIRO PERSONAL 
+  $("#frmGuardaPersonal").submit(function (e) {
+    e.preventDefault();
+    //let ruta=$('#ruta').val();
+    $.ajax({
+      url: $("#frmGuardaPersonal").attr("action"),
+      type: $("#frmGuardaPersonal").attr("method"),
+      data: $("#frmGuardaPersonal").serialize(),
+      success: function (response) {
+        //alert(response);
+
+        if (response == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al guardar el registro!'
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Guardado con exito!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          location.reload();
+        }
+      }
+    });
+  });
+  //FIN DE ALTA DE GIRO PERSONAL
 });
