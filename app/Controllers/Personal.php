@@ -49,21 +49,26 @@ class Personal extends BaseController
 		return view('dashboard/personaladd', $data);
 	}
 
-	
+
 
 	//PERSONAL USUARIOS
 	public function personal($idrg = NULL)
 	{
 		//verificar si el identificador tiene registro, de lo contrario redireccionar al menú principal
-		$consulta = $this->db->query("SELECT r.idrg, r.descrg, r.status, r.created_at, r.updated_at, r.modifica, p.app, p.nomp from rolgral r, personal p WHERE r.modifica=p.idp and r.idrg=$idrg");
+		$consulta = $this->db->query("SELECT * FROM rolgral WHERE STATUS=1 AND deleted=0 AND idrg=$idrg");
 		$rol = $consulta->getRow();
 		$existe = $consulta->getNumRows();
 		if (($existe == 0) || ($idrg == null)) {
 			return redirect()->to(base_url('dashboard'));
 		}
 		//fin de verificacion de existencia del registro
-
-		$datos = $this->db->query("SELECT p.idp, p.usuario, p.nomp, p.app, p.email, p.idpuesto, de.idepto, de.nomdepto, pu.descpuesto, p.idedo, e.estado, g.idgi, g.descg, p.idrc, r.descc, p.status, p.edita FROM departamento de, rolcargo r, giroemp g, personal p, puesto pu, estado e WHERE de.idepto=pu.idepto AND p.idrc=r.idrc and g.idgi=p.idgi AND p.idedo=e.idedo and p.idpuesto=pu.idpuesto AND r.idrg=$idrg");
+		if($idrg==4){
+			$datos = $this->db->query("SELECT p.idp, p.usuario, p.nomp, p.app, p.email, p.idpuesto, de.idepto, de.nomdepto, pu.descpuesto, p.idedo, e.estado, g.idgi, g.descg, p.idrc, r.descc, p.status, p.edita FROM departamento de, rolcargo r, giroemp g, personal p, puesto pu, estado e WHERE de.idepto=pu.idepto AND p.idrc=r.idrc and g.idgi=p.idgi AND p.idedo=e.idedo and p.idpuesto=pu.idpuesto AND r.idrg=$idrg");
+			
+		}else{
+			$datos = $this->db->query("SELECT p.idp, p.usuario, p.nomp, p.app, p.email, p.idpuesto, de.idepto, de.nomdepto, pu.descpuesto, p.idrc, r.descc, p.status, p.edita FROM departamento de, rolcargo r, personal p, puesto pu WHERE de.idepto=pu.idepto AND p.idrc=r.idrc and p.idpuesto=pu.idpuesto AND r.idrg=$idrg");
+			
+		}
 		$result = $datos->getResult();
 		$data = [
 			'uri' => current_url(true),
@@ -116,9 +121,9 @@ class Personal extends BaseController
 		if ($usuario) {
 			$datos = $this->db->query("SELECT * FROM personal WHERE usuario='$usuario'");
 			$existe = $datos->getNumRows();
-			if($existe>0){
+			if ($existe > 0) {
 				echo 1;
-			}else{
+			} else {
 				echo 0;
 			}
 		}
@@ -132,9 +137,9 @@ class Personal extends BaseController
 		if ($email) {
 			$datos = $this->db->query("SELECT * FROM personal WHERE email='$email'");
 			$existe = $datos->getNumRows();
-			if($existe>0){
+			if ($existe > 0) {
 				echo 1;
-			}else{
+			} else {
 				echo 0;
 			}
 		}
@@ -145,9 +150,8 @@ class Personal extends BaseController
 	public function addPersonal()
 	{
 		print_r($_POST);
-		
-		//print_r($_POST);
-		
+
+
 		$PubasignaModel = new PubasignaModel($db);
 		$PersonalModel = new PersonalModel($db);
 		$request = \Config\Services::request();
@@ -156,9 +160,9 @@ class Personal extends BaseController
 		} else {
 			$status = 1;
 		}
-		$contra=$request->getPostGet('contra');
-		$usuario=$request->getPostGet('usuario');
-		$edita=$request->getPostGet('modifica');
+		$contra = $request->getPostGet('contra');
+		$usuario = $request->getPostGet('usuario');
+
 		$data = array(
 			'usuario' => $usuario,
 			'contra' => sha1($contra),
@@ -171,31 +175,36 @@ class Personal extends BaseController
 			'idrc' => $request->getPostGet('idrc'),
 			'status' => $status,
 			'idrg' => $request->getPostGet('idrg'),
-			'modifica' => $edita
+			'edita' => session('idp')
 		);
 		if ($PersonalModel->save($data) === false) {
-			//var_dump($menuModel->errors());
-			echo 0;
+			$resp = 0;
 		} else {
-			echo 1;
+			$resp = 1;
 		}
-
-		$ultimoregistro = $this->db->query("SELECT * FROM personal WHERE usuario='$usuario'");
+		if ($request->getPostGet('idrg') == 4) {
+			$ultimoregistro = $this->db->query("SELECT * FROM personal WHERE usuario='$usuario'");
 			$ultimo = $ultimoregistro->getRow();
-			echo "ultimo registro".$ultimo->idp;
-		$menu = $_POST["menu"];
-		for ($i = 0; $i < count($menu); $i++) {
-			$datos=array(
-				'idp' =>$ultimo->idp,
-				'idm'=>$menu[$i],
-				'status'=>1,
-				'edita'=>$edita
-			);
-			//$datos = $this->db->query("insert into pubasigna values ($ultimo->idp,$menu[$i],1,$edita)");
-			$PubasignaModel->save($datos);
-			echo "<br> menu " . $i . ": " . $menu[$i];
+			echo "ultimo registro" . $ultimo->idp;
+			$menu = $_POST["menu"];
+
+			for ($i = 0; $i < count($menu); $i++) {
+				$datos = array(
+					'idp' => $ultimo->idp,
+					//'idp' =>5,
+					'idm' => $menu[$i],
+					'status' => 1,
+					'edita' => session('idp')
+				);
+				echo "<br>";
+				//print_r($datos);
+
+				$PubasignaModel->save($datos);
+				//echo "<br> menu " . $i . ": " . $menu[$i];
+			}
 		}
+		echo $resp;
 	}
 	//FIN ALTA DE personal
-	
+
 }

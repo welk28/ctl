@@ -8,12 +8,12 @@ class PubasignaModel extends Model
 {
 	
 	protected $table                = 'pubasigna';
-	protected $primaryKey           = 'idp';
+	protected $primaryKey           = 'idp,idm';
 	
 	protected $returnType           = 'array';
 	protected $useSoftDeletes = false;
 	
-	protected $allowedFields        = ['idm','status','edita'];
+	protected $allowedFields        = ['idp','idm','status','edita'];
 
 	// Dates
 	protected $useTimestamps        = true;

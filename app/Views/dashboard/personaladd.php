@@ -64,6 +64,7 @@
                 <input type="hidden" id="dirpuesto" value="<?php echo base_url('/llenaPuesto') ?>">
                 <input type="hidden" id="dirusuario" value="<?php echo base_url('/getUser') ?>">
                 <input type="hidden" id="diremail" value="<?php echo base_url('/getEmail') ?>">
+                <input type="hidden" id="urlpersonal" value="<?php echo base_url('/personal') ?>">
                 <div class="row">
                   <div class="col-sm">
                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success align-items-center">

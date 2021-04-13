@@ -94,8 +94,8 @@
                             <td><?= $p->nomdepto ?></td>
                             <td><?= $p->descpuesto ?></td>
                             <?php if ($rol->idrg != 1 && $rol->idrg != 2) : ?>
-                              <td><?= $p->descg ?></td>
-                              <td><?= $p->estado ?></td>
+                              <td><?php if(!empty($p->descg)){ echo $p->descg;} ?></td>
+                              <td><?php if(!empty($p->estado)){echo $p->estado;} ?></td>
                             <?php endif; ?>
 
                             <td align="center">

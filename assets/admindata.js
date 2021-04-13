@@ -1028,7 +1028,12 @@ $(document).ready(function () {
   // INICIO ALTA DE GIRO PERSONAL 
   $("#frmGuardaPersonal").submit(function (e) {
     e.preventDefault();
-    //let ruta=$('#ruta').val();
+    
+    var urlpersonal=$('#urlpersonal').val();
+		
+    var idrg=$('#idrg').val();
+    var url=urlpersonal+"/"+idrg;
+
     $.ajax({
       url: $("#frmGuardaPersonal").attr("action"),
       type: $("#frmGuardaPersonal").attr("method"),
@@ -1050,7 +1055,8 @@ $(document).ready(function () {
             showConfirmButton: false,
             timer: 2000
           });
-          location.reload();
+          //location.reload();
+          $(location).attr('href',url);
         }
       }
     });
