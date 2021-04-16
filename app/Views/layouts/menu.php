@@ -72,16 +72,6 @@ $rol = $queryrol->getResult();
               </li>
             </ul>
           </li>
-          
-          <li class="nav-item">
-            <a href="<?php echo base_url('/carrera')?>" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Carreras
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
           <?php if(!empty($rol)):?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -90,7 +80,7 @@ $rol = $queryrol->getResult();
               <p>
                 Personal
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -117,9 +107,10 @@ $rol = $queryrol->getResult();
           <?php endif;?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Charts
+                Publicaciones
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -127,24 +118,24 @@ $rol = $queryrol->getResult();
               <li class="nav-item">
                 <a href="pages/charts/chartjs.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Nueva Publicación</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/charts/flot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
+                  <p>Lista</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/charts/inline.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Papelera</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
@@ -202,8 +193,8 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -237,8 +228,8 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -266,8 +257,8 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">EXAMPLES</li>
+          </li> -->
+          <!-- <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
@@ -284,8 +275,8 @@ $rol = $queryrol->getResult();
                 Gallery
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
@@ -313,8 +304,8 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -372,8 +363,8 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
@@ -455,15 +446,15 @@ $rol = $queryrol->getResult();
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">MISCELLANEOUS</li>
+          </li> -->
+          <!-- <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="https://adminlte.io/docs/3.0" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
-          </li>
-          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+          </li> -->
+          <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
@@ -527,8 +518,8 @@ $rol = $queryrol->getResult();
               <i class="fas fa-circle nav-icon"></i>
               <p>Level 1</p>
             </a>
-          </li>
-          <li class="nav-header">LABELS</li>
+          </li> -->
+          <!-- <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
@@ -546,7 +537,7 @@ $rol = $queryrol->getResult();
               <i class="nav-icon far fa-circle text-info"></i>
               <p>Informational</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
